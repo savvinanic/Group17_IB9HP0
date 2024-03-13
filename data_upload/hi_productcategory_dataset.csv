@@ -1,0 +1,89 @@
+category_name,parent_category_id
+Beauty,NA
+Books,NA
+Clothing,NA
+Electronics,NA
+Grocery,NA
+Home & Kitchen,NA
+Sports,NA
+Toys,NA
+Body Wash,1
+Cleanser,1
+Conditioner,1
+Facial Mask,1
+Hair Styling Product,1
+Makeup Remover,1
+Moisturizer,1
+Perfume,1
+Shampoo,1
+Sunscreen,1
+Biography,2
+Fantasy,2
+Fiction,2
+History,2
+Mystery,2
+Non-Fiction,2
+Romance,2
+Science Fiction,2
+Self-Help,2
+Thriller,2
+Coat,3
+Dress,3
+Jacket,3
+Jeans,3
+Pants,3
+Shirt,3
+Shorts,3
+Skirt,3
+Sweater,3
+T-shirt,3
+Camera,4
+Headphones,4
+Laptop,4
+Printer,4
+Router,4
+Smartphone,4
+Smartwatch,4
+Speaker,4
+TV,4
+Tablet,4
+Baking Ingredients,5
+Beverages,5
+Canned Goods,5
+Cereal,5
+Condiments,5
+Fresh Produce,5
+Frozen Foods,5
+Pasta,5
+Rice,5
+Snacks,5
+Blender,6
+Coffee Maker,6
+Cookware Set,6
+Dining Set,6
+Food Processor,6
+Knife Set,6
+Microwave,6
+Pressure Cooker,6
+Rice Cooker,6
+Toaster,6
+Basketball,7
+Dumbbells,7
+Exercise Bike,7
+Football,7
+Golf Clubs,7
+Running Shoes,7
+Soccer Ball,7
+Swimming Goggles,7
+Tennis Racket,7
+Yoga Mat,7
+Action Figures,8
+Board Games,8
+Building Blocks,8
+Dolls,8
+Educational Toys,8
+Outdoor Toys,8
+Puzzles,8
+Remote Control Toys,8
+Stuffed Animals,8
+Toy Vehicles,8
