@@ -1,0 +1,438 @@
+---
+title: "Group17_code"
+output: html_document
+date: "2024-03-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,comment=NA,attr.source='.numberLines')
+rm(list=ls())
+library(readr)
+library(RSQLite)
+library(dplyr)
+library(DBI)
+```
+
+```{r}
+all_files <- list.files("data_upload/")
+all_files
+```
+```{r block2,attr.source='.numberLines'}
+prefix <- "hi_"
+suffix <- "_dataset.csv"
+
+all_files <- gsub("hi_","",all_files)
+all_files <- gsub("_dataset.csv","",all_files)
+all_files
+
+```
+
+# Looping through - for 
+Check number of rows and columns
+
+```{r loop,message=FALSE,warning=FALSE,attr.source='.numberLines'}
+all_files <- list.files("data_upload/")
+
+for (variable in all_files) {
+  this_filepath <- paste0("data_upload/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+  
+  number_of_rows <- nrow(this_file_contents)
+  number_of_columns <- ncol(this_file_contents)
+  
+  print(paste0("The file: ",variable,
+              " has: ",
+              format(number_of_rows,big.mark = ","),
+              " rows and ",
+              number_of_columns," columns"))
+}
+```
+
+#Check the data structure
+```{r loop,message=FALSE,warning=FALSE,attr.source='.numberLines'}
+all_files <- list.files("data_upload/")
+
+for (variable in all_files) {
+  this_filepath <- paste0("data_upload/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+  data_structure<-str(this_file_contents)
+  
+  print(paste0(data_structure,
+               "The file: ",variable,
+              " has above data structure"))
+}
+```
+#Check for NULL values
+```{r loop,message=FALSE,warning=FALSE,attr.source='.numberLines'}
+all_files <- list.files("data_upload/")
+
+for (variable in all_files) {
+  this_filepath <- paste0("data_upload/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+  null<-sum(is.na(this_file_contents))
+  
+  print(paste0("The file: ",variable,
+              " has a total of ", null,
+              " NULL values"))
+}
+```
+#Check that each primary key is unique in each table
+```{r loop,message=FALSE,warning=FALSE,attr.source='.numberLines'}
+all_files <- list.files("data_upload/")
+
+for (variable in all_files) {
+  this_filepath <- paste0("data_upload/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+  hi <- nrow(unique(this_file_contents[,1]))== nrow(this_file_contents)
+  
+  print(paste0("The file: ",variable,
+              " has unique primary key ",
+              hi," columns"))
+}
+```
+
+# Load Files in an sqlite database 
+```{r loadsqlite,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
+#setup the connection
+connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
+```
+
+
+
+## Connect and Setting options in the SQLite terminal
+* Let us connect to the ``hi_import.db`` database in the folder.
+```{bash, eval=FALSE}
+sqlite3 hi_import.db 
+```
+
+```{sql, eval=FALSE}
+.headers on 
+.mode column 
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_transactions_dataset.csv transactions
+```
+1. product_category
+```{sql, eval=FALSE}
+-- product_category
+CREATE TABLE "product_category" ( 
+  category_name VARCHAR(50) PRIMARY KEY,
+  parent_category_id INT NULL
+);
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_productcategory_dataset.csv "product_category"
+```
+
+```{sql connection=connection}
+SELECT * FROM "product_category";
+```
+
+2. promotion
+```{sql, eval=FALSE}
+-- promotion
+CREATE TABLE "promotion" ( 
+  promo_code INT PRIMARY KEY, 
+  percentage_discount NUMERIC NOT NULL
+);
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_promotion_dataset.csv "promotion"
+```
+
+```{sql connection=connection}
+SELECT * FROM "promotion";
+```
+
+3. supplier
+```{sql, eval=FALSE}
+-- supplier
+CREATE TABLE supplier ( 
+  supplier_id INT PRIMARY KEY, 
+  supplier_name CHAR NOT NULL,
+  supplier_phone INT NOT NULL,
+  supplier_email VARCHAR(50) NOT NULL,
+  supplier_building INT NOT NULL,
+  supplier_street VARCHAR(50) NOT NULL,
+  supplier_city VARCHAR(50) NOT NULL,
+  supplier_region VARCHAR(50) NULL,
+  supplier_postcode VARCHAR(50) NOT NULL
+) ; 
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_supplier_dataset.csv "supplier"
+```
+
+```{sql connection=connection}
+SELECT * FROM "supplier";
+```
+
+4. customer
+```{sql, eval=FALSE}
+-- customer
+CREATE TABLE "customer" ( 
+  customer_id INT PRIMARY KEY, 
+  customer_firstname VARCHAR(50) NOT NULL,
+  customer_lastname VARCHAR(50) NOT NULL,
+  customer_title VARCHAR(25) NOT NULL, 
+  customer_phone VARCHAR(50) NOT NULL,
+  customer_email VARCHAR(50) NOT NULL,
+  customer_membership TEXT NOT NULL, 
+  delivery_fee NUMERIC NOT NULL,
+  customer_building INT NOT NULL,
+  customer_street VARCHAR(50) NOT NULL, 
+  customer_city VARCHAR(50) NOT NULL, 
+  customer_region VARCHAR(50) NULL, 
+  customer_postcode VARCHAR(50) NOT NULL, 
+  promo_code INT,
+  FOREIGN KEY (promo_code) REFERENCES "promotion"(promo_code)
+) ; 
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_customer_dataset.csv "customer"
+```
+
+```{sql connection=connection}
+SELECT * FROM "customer";
+```
+
+5. delivery
+```{sql, eval=FALSE}
+-- delivery
+CREATE TABLE "delivery" ( 
+  tracking_number INT PRIMARY KEY, 
+  shipment_method VARCHAR(50) NOT NULL,
+  tracking_status VARCHAR(50) NOT NULL,
+  estimated_delivery_date DATE NOT NULL,
+  estimated_delivery_time TIME NOT NULL,
+  actual_delivery_date DATE NULL, 
+  actual_delivery_time TIME NULL,
+  delivery_instructions VARCHAR(125) NOT NULL,
+  trans_id INT,
+  FOREIGN KEY (trans_id) REFERENCES "transaction"(trans_id)
+); 
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_delivery_dataset.csv "delivery"
+```
+
+```{sql connection=connection}
+SELECT * FROM "delivery";
+```
+
+6. product
+```{sql, eval=FALSE}
+-- product
+CREATE TABLE "product" ( 
+  product_id INT PRIMARY KEY, 
+  product_name VARCHAR(25) NOT NULL,
+  product_weight NUMERIC NOT NULL,
+  product_length NUMERIC NOT NULL,
+  product_height NUMERIC NOT NULL,
+  product_width NUMERIC NOT NULL,
+  product_price NUMERIC NOT NULL,
+  supplier_id INT,
+  category_name VARCHAR(50),
+  FOREIGN KEY (supplier_id) REFERENCES "supplier"(supplier_id),
+  FOREIGN KEY (category_name) REFERENCES "product_category"(category_name)
+) ; 
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_product_dataset.csv "product"
+```
+
+```{sql connection=connection}
+SELECT * FROM "product";
+```
+
+7. order
+```{sql connection=connection}
+-- order
+CREATE TABLE "order" (
+  customer_id INT,
+  order_id INT,
+  product_id INT,
+  product_qty INT NOT NULL,
+  order_date DATE NOT NULL, 
+  order_time TIME NOT NULL,
+  PRIMARY KEY (customer_id, order_id, product_id),
+  FOREIGN KEY (customer_id) REFERENCES "customer"(customer_id),
+  FOREIGN KEY (product_id) REFERENCES "product"(product_id)
+) ; 
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_orders_dataset.csv "order"
+```
+
+```{sql connection=connection}
+SELECT * FROM "order";
+```
+
+8. transaction
+```{sql connection=connection}
+-- transaction
+CREATE TABLE "transaction" (
+  trans_id INT PRIMARY KEY,
+  order_id INT,
+  trans_date DATE NOT NULL,
+  trans_time TIME NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES "order"(order_id)
+);
+```
+
+```{sql connection=connection}
+.mode csv
+.import --skip 1 data_upload/hi_transactions_dataset.csv "transaction"
+```
+
+```{sql connection=connection}
+SELECT * FROM "transaction";
+```
+
+Store natively it in R
+```{r}
+customer <- dbReadTable(connection, "customer")
+delivery <- dbReadTable(connection, "delivery")
+order <- dbReadTable(connection, "order")
+product <- dbReadTable(connection, "product")
+product_category <- dbReadTable(connection, "product_category")
+promotion <- dbReadTable(connection, "promotion")
+supplier <- dbReadTable(connection, "supplier")
+transaction <- dbReadTable(connection, "transaction")
+```
+
+
+## Now normalize to 3NF
+For customer
+1. customer_memebership
+```{sql connection=connection}
+CREATE TABLE customer_memebership AS
+SELECT customer_id, customer_membership
+FROM "customer";
+```
+
+```{sql connection=connection}
+SELECT * FROM customer_memebership
+```
+
+2. delivery_fee_info
+```{sql connection=connection}
+CREATE TABLE delivery_fee_info AS
+SELECT customer_membership, delivery_fee
+FROM "customer";
+```
+
+```{sql connection=connection}
+SELECT * FROM delivery_fee_info
+```
+
+3. customer_basic_info
+```{sql connection=connection}
+CREATE TABLE customer_basic_info AS
+SELECT customer_id, customer_firstname, customer_lastname, customer_title, customer_phone, customer_email, customer_building, customer_street,  customer_city,  customer_region,  customer_postcode, promo_code
+FROM "customer";
+```
+
+```{sql connection=connection}
+SELECT * FROM customer_basic_info
+```
+
+For order
+1. order_datetime
+```{sql connection=connection}
+CREATE TABLE order_datetime AS
+SELECT DISTINCT customer_id, order_id, order_date, order_time
+FROM "order";
+```
+
+```{sql connection=connection}
+SELECT * FROM order_datetime
+```
+
+2. order_products_info
+```{sql connection=connection}
+CREATE TABLE order_products_info AS
+SELECT customer_id, order_id, product_id, product_qty
+FROM "order";
+```
+
+```{sql connection=connection}
+SELECT * FROM order_products_info
+```
+
+For Delivery
+1. tracking_number
+```{sql connection=connection}
+CREATE TABLE tracking_number AS
+SELECT tracking_number, delivery_instructions, trans_id
+FROM "delivery";
+```
+
+```{sql connection=connection}
+SELECT * FROM tracking_number
+```
+
+2. estimated_delivery_date
+```{sql connection=connection}
+CREATE TABLE estimated_delivery_date AS
+SELECT tracking_number, shipment_method, estimated_delivery_date, estimated_delivery_time
+FROM "delivery";
+```
+
+```{sql connection=connection}
+SELECT * FROM estimated_delivery_date
+```
+
+3. actual_delivery_date
+```{sql connection=connection}
+CREATE TABLE actual_delivery_date AS
+SELECT tracking_number, tracking_status, actual_delivery_date, actual_delivery_time
+FROM "delivery";
+```
+
+```{sql connection=connection}
+SELECT * FROM actual_delivery_date
+```
+
+
+```{sql connection=connection}
+PRAGMA table_info(actual_delivery_date);
+```
+
+Store natively it in R
+```{r}
+customer_memebership <- dbReadTable(connection, "customer_memebership")
+delivery_fee_info <- dbReadTable(connection, "delivery_fee_info")
+customer_basic_info <- dbReadTable(connection, "customer_basic_info")
+
+order_datetime <- dbReadTable(connection, "order_datetime")
+order_products_info <- dbReadTable(connection, "order_products_info")
+
+tracking_number <- dbReadTable(connection, "tracking_number")
+estimated_delivery_date <- dbReadTable(connection, "estimated_delivery_date")
+actual_delivery_date <- dbReadTable(connection, "actual_delivery_date")
+```
+
+```{r listtables}
+RSQLite::dbListTables(connection)
+```
+
+```{r disconnect}
+RSQLite::dbDisconnect(connection)
+```
