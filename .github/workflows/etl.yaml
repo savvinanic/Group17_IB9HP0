@@ -5,7 +5,7 @@ on:
 #    - cron: '0 */3 * * *' # Run every 3 hours
   push:
     branches: [ main ]
-    jobs:
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
