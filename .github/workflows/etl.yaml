@@ -51,7 +51,14 @@ jobs:
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
           git add --all database/
-      
+      - name: Commit updated database
+        run: |
+          git add DM_project/e_commerce_database.db
+          git commit -m "Update database with new data" || echo "No changes to commit"
+          git push origin main
+          working-directory: DM_project
+
+      - name: Push changes
       - name: Commit files
         run: |
           git commit --author="savvinanic <savvinanicolaou@gmail.com>" -m "Update database"
