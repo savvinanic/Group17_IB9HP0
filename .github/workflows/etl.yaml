@@ -10,6 +10,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          NODE_VERSION: 16
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
       
       - name: Setup R environment
         uses: r-lib/actions/setup-r@v2
