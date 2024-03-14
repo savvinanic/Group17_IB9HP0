@@ -26,3 +26,19 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite))'
+      - name: Execute R script
+        run: |
+          Rscript R/R_code.R
+      - name: Add files
+        run: |
+          git config --global user.email "savvinanicolaou@gmail.com"
+          git config --global user.name "savvinanic"
+          git add --all figures/
+      - name: Commit files
+        run: |
+          git commit -m "Add regression plot figure"
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+            github_token: ${{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 }}
+            branch: main
