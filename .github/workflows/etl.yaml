@@ -50,11 +50,11 @@ jobs:
         run: |
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
-          git add --all figures/
+          git add --all database/
       
       - name: Commit files
         run: |
-          git commit -m "Add regression plot figure"
+          git commit -m "Update Database"
       
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
