@@ -31,6 +31,7 @@ jobs:
       - name: Execute R script
         run: |
           Rscript R/R_code.R
+          echo "Data processing completed" > processing.log  # Add this line to create a log file
       - name: Add files
         run: |
           git config --global user.email "savvinanicolaou@gmail.com"
