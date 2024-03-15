@@ -33,7 +33,6 @@ jobs:
           Rscript R/R_code.R
       - name: Add files
         run: |
-          git config --local --unset-all "http.https://github.com/.extraheader"
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
           git add data_upload/
@@ -45,8 +44,8 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-            github_token: ${{ secrets.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}}
-            branch: main
+          github_token: ${{ secrets.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 }}
+          branch: main
       
       
       
