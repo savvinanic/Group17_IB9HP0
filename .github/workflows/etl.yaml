@@ -41,6 +41,7 @@ jobs:
           git add R/
       - name: Commit files
         run: |
+          git add processing.log
           git commit -m "Update Database"
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
