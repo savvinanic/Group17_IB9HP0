@@ -90,32 +90,25 @@ for (variable in all_files) {
               hi," columns"))
 }
 ```
+For order dataset: we have a composite composed of 3 attribute, we'll check this one separately.
+```{r getindividualvalues}
+order <- read.csv("data_upload/hi_order_dataset.csv")
+nrow(unique(order[,1:3])) == nrow(order)
+#sum(nrow(unique(orders[,1:2])))
+#length((unique(orders$cutomer_id)))
+#length((unique(orders$order_id)))
+```
+The file: hi_order_dataset.csv has unique primary composite key TRUE columns
+
 
 # Load Files in an sqlite database 
 ```{r loadsqlite,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
 #setup the connection
-connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
+connection <- RSQLite::dbConnect(RSQLite::SQLite(),"database/hi_import.db")
 ```
 
-
-
-## Connect and Setting options in the SQLite terminal
-* Let us connect to the ``hi_import.db`` database in the folder.
-```{bash, eval=FALSE}
-sqlite3 hi_import.db 
-```
-
-```{sql, eval=FALSE}
-.headers on 
-.mode column 
-```
-
-```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_transactions_dataset.csv transactions
-```
 1. product_category
-```{sql, eval=FALSE}
+```{sql connection=connection}
 -- product_category
 CREATE TABLE "product_category" ( 
   category_name VARCHAR(50) PRIMARY KEY,
@@ -123,27 +116,20 @@ CREATE TABLE "product_category" (
 );
 ```
 
-```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_productcategory_dataset.csv "product_category"
-```
 
 ```{sql connection=connection}
 SELECT * FROM "product_category";
 ```
 
 2. promotion
-```{sql, eval=FALSE}
+```{sql connection=connection}
 -- promotion
 CREATE TABLE "promotion" ( 
   promo_code INT PRIMARY KEY, 
-  percentage_discount NUMERIC NOT NULL
-);
-```
-
-```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_promotion_dataset.csv "promotion"
+  percentage_discount NUMERIC NOT NULL,
+  promo_start_date DATE NULL,
+  promo_expire_date DATE NULL
+  );
 ```
 
 ```{sql connection=connection}
@@ -151,7 +137,7 @@ SELECT * FROM "promotion";
 ```
 
 3. supplier
-```{sql, eval=FALSE}
+```{sql connection=connection}
 -- supplier
 CREATE TABLE supplier ( 
   supplier_id INT PRIMARY KEY, 
@@ -161,22 +147,17 @@ CREATE TABLE supplier (
   supplier_building INT NOT NULL,
   supplier_street VARCHAR(50) NOT NULL,
   supplier_city VARCHAR(50) NOT NULL,
-  supplier_region VARCHAR(50) NULL,
   supplier_postcode VARCHAR(50) NOT NULL
 ) ; 
 ```
 
-```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_supplier_dataset.csv "supplier"
-```
 
 ```{sql connection=connection}
 SELECT * FROM "supplier";
 ```
 
 4. customer
-```{sql, eval=FALSE}
+```{sql connection=connection}
 -- customer
 CREATE TABLE "customer" ( 
   customer_id INT PRIMARY KEY, 
@@ -190,24 +171,19 @@ CREATE TABLE "customer" (
   customer_building INT NOT NULL,
   customer_street VARCHAR(50) NOT NULL, 
   customer_city VARCHAR(50) NOT NULL, 
-  customer_region VARCHAR(50) NULL, 
   customer_postcode VARCHAR(50) NOT NULL, 
   promo_code INT,
   FOREIGN KEY (promo_code) REFERENCES "promotion"(promo_code)
 ) ; 
 ```
 
-```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_customer_dataset.csv "customer"
-```
 
 ```{sql connection=connection}
 SELECT * FROM "customer";
 ```
 
 5. delivery
-```{sql, eval=FALSE}
+```{sql connection=connection}
 -- delivery
 CREATE TABLE "delivery" ( 
   tracking_number INT PRIMARY KEY, 
@@ -223,17 +199,13 @@ CREATE TABLE "delivery" (
 ); 
 ```
 
-```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_delivery_dataset.csv "delivery"
-```
 
 ```{sql connection=connection}
 SELECT * FROM "delivery";
 ```
 
 6. product
-```{sql, eval=FALSE}
+```{sql connection=connection}
 -- product
 CREATE TABLE "product" ( 
   product_id INT PRIMARY KEY, 
@@ -249,14 +221,13 @@ CREATE TABLE "product" (
   FOREIGN KEY (category_name) REFERENCES "product_category"(category_name)
 ) ; 
 ```
-
-```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_product_dataset.csv "product"
-```
-
 ```{sql connection=connection}
 SELECT * FROM "product";
+```
+
+
+```{sql connection=connection}
+DROP TABLE "order";
 ```
 
 7. order
@@ -275,15 +246,14 @@ CREATE TABLE "order" (
 ) ; 
 ```
 
-```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_orders_dataset.csv "order"
-```
 
 ```{sql connection=connection}
 SELECT * FROM "order";
 ```
 
+```{sql connection=connection}
+DROP TABLE "transaction";
+```
 8. transaction
 ```{sql connection=connection}
 -- transaction
@@ -297,25 +267,10 @@ CREATE TABLE "transaction" (
 ```
 
 ```{sql connection=connection}
-.mode csv
-.import --skip 1 data_upload/hi_transactions_dataset.csv "transaction"
-```
-
-```{sql connection=connection}
 SELECT * FROM "transaction";
 ```
 
-Store natively it in R
-```{r}
-customer <- dbReadTable(connection, "customer")
-delivery <- dbReadTable(connection, "delivery")
-order <- dbReadTable(connection, "order")
-product <- dbReadTable(connection, "product")
-product_category <- dbReadTable(connection, "product_category")
-promotion <- dbReadTable(connection, "promotion")
-supplier <- dbReadTable(connection, "supplier")
-transaction <- dbReadTable(connection, "transaction")
-```
+
 
 
 ## Now normalize to 3NF
@@ -323,7 +278,7 @@ For customer
 1. customer_memebership
 ```{sql connection=connection}
 CREATE TABLE customer_memebership AS
-SELECT customer_id, customer_membership
+SELECT customer_id, customer_membership, delivery_fee
 FROM "customer";
 ```
 
@@ -331,21 +286,11 @@ FROM "customer";
 SELECT * FROM customer_memebership
 ```
 
-2. delivery_fee_info
-```{sql connection=connection}
-CREATE TABLE delivery_fee_info AS
-SELECT customer_membership, delivery_fee
-FROM "customer";
-```
 
-```{sql connection=connection}
-SELECT * FROM delivery_fee_info
-```
-
-3. customer_basic_info
+2. customer_basic_info
 ```{sql connection=connection}
 CREATE TABLE customer_basic_info AS
-SELECT customer_id, customer_firstname, customer_lastname, customer_title, customer_phone, customer_email, customer_building, customer_street,  customer_city,  customer_region,  customer_postcode, promo_code
+SELECT customer_id, customer_firstname, customer_lastname, customer_title, customer_phone, customer_email, customer_building, customer_street,  customer_city, customer_postcode, promo_code
 FROM "customer";
 ```
 
@@ -410,15 +355,120 @@ FROM "delivery";
 SELECT * FROM actual_delivery_date
 ```
 
+Calculated field: transaction_amount
+```{sql connection=connection}
+SELECT 
+    o.order_id, 
+    prm.percentage_discount, 
+    m.delivery_fee, 
+    SUM(p.product_price * o.product_qty) AS order_price, 
+    ROUND(SUM(p.product_price * o.product_qty) * (1 - CAST(prm.percentage_discount AS REAL) / 100) + m.delivery_fee, 2) AS trans_amount
+FROM 
+    "order_products_info" o
+    JOIN "product" p ON o.product_id = p.product_id
+    JOIN "customer" c ON o.customer_id = c.customer_id
+    JOIN "promotion" prm ON c.promo_code = prm.promo_code
+    JOIN "membership_info" m ON m.customer_id = c.customer_id
+WHERE 
+    o.order_date BETWEEN prm.promo_start_date AND prm.promo_expire_date
+GROUP BY 
+    o.order_id;
+
+```
 
 ```{sql connection=connection}
 PRAGMA table_info(actual_delivery_date);
 ```
 
+
+```{r loadsqlite,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
+#setup the connection
+connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
+```
+
+```{r}
+# Read datasets
+customer_dataset <- readr::read_csv("data_upload/hi_customer_dataset.csv")
+delivery_dataset <- readr::read_csv("data_upload/hi_delivery_dataset.csv")
+order_dataset <- readr::read_csv("data_upload/hi_order_dataset.csv")
+product_dataset <- readr::read_csv("data_upload/hi_product_dataset.csv")
+productcategory_dataset <- readr::read_csv("data_upload/hi_productcategory_dataset.csv")
+promotion_dataset <- readr::read_csv("data_upload/hi_promotion_dataset.csv")
+supplier_dataset <- readr::read_csv("data_upload/hi_supplier_dataset.csv")
+transaction_dataset <- readr::read_csv("data_upload/hi_transaction_dataset.csv")
+
+```
+
+
+
+```{r getindividualvalues}
+order <- read.csv("data_upload/hi_order_dataset.csv")
+nrow(unique(order[,1:3])) == nrow(order)
+sum(nrow(unique(order[,1:2])))
+length((unique(order$cutomer_id)))
+length((unique(order$product_id)))
+length((unique(order$order_id)))
+# Adjust the path to your actual CSV file
+my_data <- read.csv("data_upload/hi_delivery_dataset.csv")
+```
+
+
+```{r loadsqlite,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
+
+dbWriteTable(connection, "delivery",my_data , append = TRUE, row.names = FALSE)
+
+```
+
+
+
+
+
+
+
+
+
+```{r}
+my_data <- read.csv("data_upload/hi_delivery_dataset.csv")
+```
+
+```{sql connection=connection}
+dbWriteTable(connection, 'delivery', my_data, append = TRUE, row.names = FALSE)
+```
+
+
+
+```{r loadsqlite,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
+#setup the connection
+connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
+
+for (variable in all_files) {
+  this_filepath <- paste0("data_upload/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+
+  table_name <- gsub(".csv","",variable)
+  #Remove prefix and suffix 
+  table_name <- gsub("hi_","",table_name)
+  table_name <- gsub("_dataset","",table_name)
+  # table_name <- variable
+  
+  RSQLite::dbWriteTable(connection,table_name,this_file_contents,overwrite=TRUE)
+
+}
+
+```
+
+
+
+
+
+
+
+
+
 Store natively it in R
 ```{r}
 customer_memebership <- dbReadTable(connection, "customer_memebership")
-delivery_fee_info <- dbReadTable(connection, "delivery_fee_info")
+
 customer_basic_info <- dbReadTable(connection, "customer_basic_info")
 
 order_datetime <- dbReadTable(connection, "order_datetime")
@@ -435,4 +485,57 @@ RSQLite::dbListTables(connection)
 
 ```{r disconnect}
 RSQLite::dbDisconnect(connection)
+```
+
+Store natively it in R
+```{r}
+order <- dbReadTable(connection, "order")
+promotion <- dbReadTable(connection, "promotion")
+delivery <- dbReadTable(connection, "delivery")
+product_category <- dbReadTable(connection, "product_category")
+transaction <- dbReadTable(connection, "transaction")
+product <- dbReadTable(connection, "product")
+supplier <- dbReadTable(connection, "supplier")
+membership_info <- dbReadTable(connection, "membership")
+estimated_delivery_date <- dbReadTable(connection, "estimateddeliverydate")
+actual_delivery_date <- dbReadTable(connection, "actualdeliverydate")
+order_date <- dbReadTable(connection, "orderdate")
+customer_basic_info <- dbReadTable(connection, "customerbasicinfo")
+order_products_info <- dbReadTable(connection, "orderproductsinfo")
+delivery_tracking <- dbReadTable(connection, "trackingnumber")
+
+
+```
+
+
+# Data visualisation
+
+## Product Category vs Count
+```{sql connection=connection}
+  SELECT p.*, pc.*
+  FROM product AS p
+  INNER JOIN product_category AS pc ON p.category_name = pc.category_name
+```
+
+```{r, connection = connection}
+product_procat_join <- dbGetQuery(connection, "
+  SELECT p.*, pc.parent_category_id
+  FROM product AS p
+  INNER JOIN product_category AS pc ON p.category_name = pc.category_name
+")
+```
+
+```{r}
+product_procat_join <- product_procat_join %>% mutate(parent_category_id=factor(parent_category_id, levels=c("1", "2", "3", "4", "5", "6", "7", "8"), labels=c("Beauty", "Books", "Clothing", "Electronics", "Grocery", "Home & Kitchen", "Sports", "Toys") ))
+
+product_procat_join %>%
+  group_by(parent_category_id) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x = factor(parent_category_id), y = count, fill = factor(parent_category_id))) +
+  geom_bar(stat = "identity", position = "dodge", color = "black", alpha = 0.7) +
+  labs(title = "Number of Products for each Parent Category",
+       x = "Parent Category",
+       y = "Count") +
+  scale_fill_discrete(name = "Parent Category")
+
 ```

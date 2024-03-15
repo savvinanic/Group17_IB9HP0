@@ -1,4 +1,4 @@
-product_id,product_name,product_weight,product_length,product_height,product_width,product_price,supplier_id,category_name
+﻿product_id,product_name,product_weight,product_length,product_height,product_width,product_price,supplier_id,category_name
 34-100-2931, Unveiled: The Life of a Visionary ,4322,67,35,30,11.62,RSH-48812,Biography
 60-215-8627, Learn & Play Alphabet Blocks ,614,24,22,98,30.83,HNW-87364,Educational Toys
 10-395-8862, Organic Harvest Bundle ,1942,65,10,30,26.30,QIS-31117,Fresh Produce
@@ -757,7 +757,7 @@ product_id,product_name,product_weight,product_length,product_height,product_wid
 16-458-1689, Wrap Style Jersey Knit Dress ,2843,25,83,37,4.36,TCH-90818,Dress
 76-952-2717, Dark and Twisted Gothic Fiction ,1401,57,48,8,2.23,BZV-37538,Fiction
 49-434-9174, Biodegradable Makeup Remover Pads ,1071,85,18,10,8.31,RLL-62137,Makeup Remover
-82-449-1798, True Crime Expos� Chronicles ,4386,92,62,62,48.76,CNJ-00328,Non-Fiction
+82-449-1798, True Crime Exposé Chronicles ,4386,92,62,62,48.76,CNJ-00328,Non-Fiction
 29-230-6631, Gaming Console Surround Sound Speaker ,4010,87,20,99,19.10,PGU-03868,Speaker
 59-871-3856, Chakra Alignment Printed Yoga Mat ,501,90,99,40,6.60,EWW-70463,Yoga Mat
 31-897-4567, Solid Steel Hex Dumbbell Set ,3142,38,59,57,32.66,LZE-58829,Dumbbells
