@@ -31,35 +31,19 @@ jobs:
       - name: Execute R script
         run: |
           Rscript R/R_code.R
-          echo "Data processing completed" > processing.log  # Add this line to create a log file
       - name: Add files
         run: |
+          git config --local --unset-all "http.https://github.com/.extraheader"
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
           git add data_upload/
           git add hi_import.db
           git add R/
-          git add processing.log  # Add the log file to Git tracking
       - name: Commit files
         run: |
-          git add processing.log
           git commit -m "Update Database"
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: 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
           branch: main
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
- 
