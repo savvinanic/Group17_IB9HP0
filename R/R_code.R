@@ -2,11 +2,11 @@ library(readr)
 library(RSQLite)
 
 #Setup the connection
-connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
+connection <- RSQLite::dbConnect(RSQLite::SQLite(),"../database/hi_import.db")
 
 # Read datasets
 delivery <- readr::read_csv("../data_upload/hi_delivery_dataset.csv")
-orders <- readr::read_csv("../data_upload/hi_order_dataset.csv")
+order <- readr::read_csv("../data_upload/hi_order_dataset.csv")
 product <- readr::read_csv("../data_upload/hi_product_dataset.csv")
 product_category <- readr::read_csv("../data_upload/hi_productcategory_dataset.csv")
 promotion <- readr::read_csv("../data_upload/hi_promotion_dataset.csv")
@@ -36,4 +36,4 @@ dbWriteTable(connection, 'customer_basic_info_table', customer_basic_info, appen
 dbWriteTable(connection, 'order_products_info_table', order_products_info, append = TRUE)
 dbWriteTable(connection, 'delivery_tracking_table', tracking_number, append = TRUE)
 
-
+#RSQLite::dbDisconnect(connection)
