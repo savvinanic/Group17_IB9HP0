@@ -26,24 +26,27 @@ jobs:
       - name: Install packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite"))'
+          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite"),dependencies = TRUE))'
       
       - name: Execute R script
         run: |
           Rscript R/R_code.R
+      - name: Update database with new data
+        run: | 
+          database/hi_import.db
       - name: Add files
         run: |
           git config --local --unset-all "http.https://github.com/.extraheader"
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
-          git add data_upload/
-          git add hi_import.db
-          git add R/
+          git add .
+          git commit -m "Update database and analysis results" || echo "No changes to commit"
+        
       - name: Commit files
         run: |
           git commit -m "Update Database"
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: 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
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
