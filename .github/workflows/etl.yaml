@@ -1,31 +1,21 @@
-name: ETL workflow for group 17
+name: Update Repo with result
 
 on:
+#  schedule:
+#    - cron: '0 */3 * * *' # Run every 3 hours
   push:
     branches: [ main ]
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          NODE_VERSION: 16
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 20
-      
       - name: Setup R environment
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.2.0'
-
       - name: Cache R packages
         uses: actions/cache@v2
         with:
@@ -33,10 +23,6 @@ jobs:
           key: ${{ runner.os }}-r-${{ hashFiles('**/lockfile') }}
           restore-keys: |
             ${{ runner.os }}-r-
-        env:
-          CACHE_NAME: cache-r-packages
-        if: steps.cache.outputs.cache-hit != 'true'
-      
       - name: Install packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -45,26 +31,32 @@ jobs:
       - name: Execute R script
         run: |
           Rscript R/R_code.R
-      
       - name: Add files
         run: |
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
-          git add --all database/
-      - name: Commit updated database
-        run: |
-          git add DM_project/e_commerce_database.db
-          git commit -m "Update database with new data" || echo "No changes to commit"
-          git push origin main
-          working-directory: DM_project
-
-      - name: Push changes
+          git add data_upload/
+          git add hi_import.db
+          git add R/
       - name: Commit files
         run: |
-          git commit --author="savvinanic <savvinanicolaou@gmail.com>" -m "Update database"
-      
+          git commit -m "Update Database"
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: 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
+          github_token: ${{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}}
           branch: main
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+ 
