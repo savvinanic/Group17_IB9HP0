@@ -39,6 +39,7 @@ jobs:
           git add data_upload/
           git add hi_import.db
           git add R/
+          git add processing.log  # Add the log file to Git tracking
       - name: Commit files
         run: |
           git add processing.log
