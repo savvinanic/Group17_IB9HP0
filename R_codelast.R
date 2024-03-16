@@ -5,72 +5,75 @@ library(DBI)
 
 # List all files
 all_files <- list.files("Dataset/")
-print(all_files)
+all_files
 
 # Extract file names without prefix and suffix
-all_files <- gsub("hi_", "", all_files)
-all_files <- gsub("_dataset.csv", "", all_files)
-print(all_files)
+prefix <- "hi_"
+suffix <- "_dataset.csv"
+all_files <- gsub("hi_","",all_files)
+all_files <- gsub("_dataset.csv","",all_files)
+all_files
 
 # Using R loops to check data integrity
 
 # Check number of rows and columns
 all_files <- list.files("Dataset/")
+
 for (variable in all_files) {
-  this_filepath <- paste0("Dataset/", variable)
+  this_filepath <- paste0("Dataset/",variable)
   this_file_contents <- readr::read_csv(this_filepath)
   
   number_of_rows <- nrow(this_file_contents)
   number_of_columns <- ncol(this_file_contents)
   
-  print(paste0("The file: ", variable,
+  print(paste0("The file: ",variable,
                " has: ",
-               format(number_of_rows, big.mark = ","),
+               format(number_of_rows,big.mark = ","),
                " rows and ",
-               number_of_columns, " columns"))
+               number_of_columns," columns"))
 }
 
 # Check the data structure
 for (variable in all_files) {
-  this_filepath <- paste0("Dataset/", variable)
+  this_filepath <- paste0("Dataset/",variable)
   this_file_contents <- readr::read_csv(this_filepath)
-  data_structure <- str(this_file_contents)
+  data_structure<-str(this_file_contents)
   
   print(paste0(data_structure,
-               "The file: ", variable,
+               "The file: ",variable,
                " has above data structure"))
 }
 
 # Check for NULL values
 for (variable in all_files) {
-  this_filepath <- paste0("Dataset/", variable)
+  this_filepath <- paste0("Dataset/",variable)
   this_file_contents <- readr::read_csv(this_filepath)
-  null <- sum(is.na(this_file_contents))
+  null<-sum(is.na(this_file_contents))
   
-  print(paste0("The file: ", variable,
+  print(paste0("The file: ",variable,
                " has a total of ", null,
                " NULL values"))
 }
 
 # Check that each primary key is unique in each table except for order
 for (variable in all_files) {
-  this_filepath <- paste0("Dataset/", variable)
+  this_filepath <- paste0("Dataset/",variable)
   this_file_contents <- readr::read_csv(this_filepath)
-  hi <- nrow(unique(this_file_contents[, 1])) == nrow(this_file_contents)
+  hi <- nrow(unique(this_file_contents[,1]))== nrow(this_file_contents)
   
-  print(paste0("The file: ", variable,
+  print(paste0("The file: ",variable,
                " has unique primary key ",
-               hi, " columns"))
+               hi," columns"))
 }
 
 # For order dataset
 orderdate_dataset <- read.csv("Dataset/hi_order_datetime_dataset.csv")
 orderproductsinfo_dataset <- read.csv("Dataset/hi_order_products_info_dataset.csv")
-print(nrow(unique(orderdate_dataset[, 1:2])) == nrow(orderdate_dataset))
-print(nrow(unique(orderproductsinfo_dataset[, 1:3])) == nrow(orderproductsinfo_dataset))
+nrow(unique(orderdate_dataset[,1:2])) == nrow(orderdate_dataset)
+nrow(unique(orderproductsinfo_dataset[,1:3])) == nrow(orderproductsinfo_dataset)
 
 # Load Files in an sqlite database 
-connection <- RSQLite::dbConnect(RSQLite::SQLite(), "hi_import.db")
+connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
 
 # Drop tables
 RSQLite::dbExecute(connection, "DROP TABLE IF EXISTS product")
@@ -130,6 +133,7 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM supplier;"))
 RSQLite::dbExecute(connection, "
                    CREATE TABLE customer (
                    customer_id INT PRIMARY KEY, 
+                   promo_code INT,
                    customer_firstname VARCHAR(50) NOT NULL,
                    customer_lastname VARCHAR(50) NOT NULL,
                    customer_title VARCHAR(25) NOT NULL, 
@@ -141,7 +145,6 @@ RSQLite::dbExecute(connection, "
                    customer_street VARCHAR(50) NOT NULL, 
                    customer_city VARCHAR(50) NOT NULL, 
                    customer_postcode VARCHAR(50) NOT NULL, 
-                   promo_code INT,
                    FOREIGN KEY (promo_code) REFERENCES promotion(promo_code)
                    );")
 
@@ -151,6 +154,7 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM customer;"))
 RSQLite::dbExecute(connection, "
                    CREATE TABLE delivery (
                    tracking_number INT PRIMARY KEY, 
+                   trans_id INT,
                    shipment_method VARCHAR(50) NOT NULL,
                    tracking_status VARCHAR(50) NOT NULL,
                    estimated_delivery_date DATE NOT NULL,
@@ -158,7 +162,6 @@ RSQLite::dbExecute(connection, "
                    actual_delivery_date DATE NULL, 
                    actual_delivery_time TIME NULL,
                    delivery_instructions VARCHAR(125) NOT NULL,
-                   trans_id INT,
                    FOREIGN KEY (trans_id) REFERENCES 'transaction'(trans_id)
                    );")
 
@@ -168,14 +171,14 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM delivery;"))
 RSQLite::dbExecute(connection, "
                    CREATE TABLE product (
                    product_id INT PRIMARY KEY, 
+                   supplier_id INT,
+                   category_name VARCHAR(50),
                    product_name VARCHAR(25) NOT NULL,
                    product_weight NUMERIC NOT NULL,
                    product_length NUMERIC NOT NULL,
                    product_height NUMERIC NOT NULL,
                    product_width NUMERIC NOT NULL,
                    product_price NUMERIC NOT NULL,
-                   supplier_id INT,
-                   category_name VARCHAR(50),
                    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
                    FOREIGN KEY (category_name) REFERENCES product_category(category_name)
                    );")
@@ -185,13 +188,13 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM product;"))
 # order
 RSQLite::dbExecute(connection, "
                    CREATE TABLE 'order' (
-                   customer_id INT,
                    order_id INT,
+                   customer_id INT,
                    product_id INT,
                    product_qty INT NOT NULL,
                    order_date DATE NOT NULL, 
                    order_time TIME NOT NULL,
-                   PRIMARY KEY (customer_id, order_id, product_id),
+                   PRIMARY KEY (order_id, customer_id, product_id),
                    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
                    FOREIGN KEY (product_id) REFERENCES product(product_id)
                    );")
@@ -217,6 +220,7 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM 'transaction';"))
 RSQLite::dbExecute(connection, "
                    CREATE TABLE customer_basic_info (
                    customer_id INT PRIMARY KEY, 
+                   promo_code INT,
                    customer_firstname VARCHAR(50) NOT NULL,
                    customer_lastname VARCHAR(50) NOT NULL,
                    customer_title VARCHAR(25) NOT NULL, 
@@ -226,7 +230,6 @@ RSQLite::dbExecute(connection, "
                    customer_street VARCHAR(50) NOT NULL, 
                    customer_city VARCHAR(50) NOT NULL, 
                    customer_postcode VARCHAR(50) NOT NULL, 
-                   promo_code INT,
                    FOREIGN KEY (promo_code) REFERENCES promotion(promo_code)
                    );")
 
@@ -248,11 +251,11 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM customer_membership;"))
 # order_products_info
 RSQLite::dbExecute(connection, "
                    CREATE TABLE order_products_info (
-                   customer_id INT,
                    order_id INT,
+                   customer_id INT,
                    product_id INT,
                    product_qty INT NOT NULL,
-                   PRIMARY KEY (customer_id, order_id, product_id),
+                   PRIMARY KEY (order_id, customer_id, product_id),
                    FOREIGN KEY (customer_id) REFERENCES customer_basic_info(customer_id),
                    FOREIGN KEY (product_id) REFERENCES product(product_id)
                    );")
@@ -262,11 +265,11 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM order_products_info;"))
 # order_datetime
 RSQLite::dbExecute(connection, "
                    CREATE TABLE order_datetime (
-                   customer_id INT,
                    order_id INT,
+                   customer_id INT,
                    order_date DATE NOT NULL, 
                    order_time TIME NOT NULL,
-                   PRIMARY KEY (customer_id, order_id),
+                   PRIMARY KEY (order_id, customer_id),
                    FOREIGN KEY (customer_id) REFERENCES customer_basic_info(customer_id)
                    );")
 
@@ -277,8 +280,8 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM order_datetime;"))
 RSQLite::dbExecute(connection, "
                    CREATE TABLE delivery_tracking (
                    tracking_number INT PRIMARY KEY, 
-                   delivery_instructions VARCHAR(125) NOT NULL,
                    trans_id INT,
+                   delivery_instructions VARCHAR(125) NOT NULL,
                    FOREIGN KEY (trans_id) REFERENCES 'transaction'(trans_id)
                    );")
 
@@ -311,21 +314,44 @@ RSQLite::dbExecute(connection, "
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM actual_delivery_date;"))
 
 # Import csv files into SQL table
-for (variable in all_files) {
-  this_filepath <- paste0("Dataset/", variable)
-  this_file_contents <- readr::read_csv(this_filepath)
-  
-  table_name <- gsub(".csv", "", variable)
-  table_name <- gsub("hi_", "", table_name)
-  table_name <- gsub("_dataset", "", table_name)
-  
-  RSQLite::dbWriteTable(connection, table_name, this_file_contents, append = TRUE, row.names = FALSE)
-}
+## Read datasets
+### order
+order_datetime_dataset <- read.csv("Dataset/hi_order_datetime_dataset.csv")
+order_products_info_dataset <- read.csv("Dataset/hi_order_products_info_dataset.csv")
+### delivery
+actual_delivery_date_dataset <- read.csv("Dataset/hi_actual_delivery_date_dataset.csv")
+delivery_tracking_dataset <- read.csv("Dataset/hi_delivery_tracking_dataset.csv")
+estimated_delivery_date_dataset <- read.csv("Dataset/hi_estimated_delivery_date_dataset.csv")
+### customer
+customer_basic_info_dataset <- read.csv("Dataset/hi_customer_basic_info_dataset.csv")
+customer_membership_dataset <- read.csv("Dataset/hi_customer_membership_dataset.csv")
+product_dataset <- read.csv("Dataset/hi_product_dataset.csv")
+product_category_dataset <- read.csv("Dataset/hi_product_category_dataset.csv")
+promotion_dataset <- read.csv("Dataset/hi_promotion_dataset.csv")
+supplier_dataset <- read.csv("Dataset/hi_supplier_dataset.csv")
+transaction_dataset <- read.csv("Dataset/hi_transaction_dataset.csv")
+
+## Import
+dbWriteTable(connection, "product", product_dataset, append = TRUE, row.names = FALSE)
+dbWriteTable(connection, "product_category", product_category_dataset, append = TRUE, row.names = FALSE)
+dbWriteTable(connection, "promotion", promotion_dataset, append = TRUE, row.names = FALSE)
+dbWriteTable(connection, "supplier", supplier_dataset, append = TRUE, row.names = FALSE)
+dbWriteTable(connection, "transaction", transaction_dataset, append = TRUE, row.names = FALSE)
+### Order
+dbWriteTable(connection, "order_datetime", order_datetime_dataset, append = TRUE, row.names = FALSE)
+dbWriteTable(connection, "order_products_info", order_products_info_dataset, append = TRUE, row.names = FALSE)
+### Delivery
+dbWriteTable(connection, "actual_delivery_date", actual_delivery_date_dataset, append = TRUE, row.names = FALSE)
+dbWriteTable(connection, "delivery_tracking", delivery_tracking_dataset, append = TRUE, row.names = FALSE)
+dbWriteTable(connection, "estimated_delivery_date", estimated_delivery_date_dataset, append = TRUE, row.names = FALSE)
+### Customer
+dbWriteTable(connection, "customer_membership", customer_membership_dataset, append = TRUE, row.names = FALSE)
+dbWriteTable(connection, "customer_basic_info", customer_basic_info_dataset, append = TRUE, row.names = FALSE)
+
 
 # Check the tables using select
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM product LIMIT 5"))
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM product_category LIMIT 5"))
-print(RSQLite::dbGetQuery(connection, "SELECT * FROM promotion LIMIT 5"))
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM supplier LIMIT 5"))
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM 'transaction' LIMIT 5"))
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM promotion LIMIT 5"))
@@ -377,3 +403,19 @@ print(RSQLite::dbListTables(connection))
 
 # Disconnect SQL
 RSQLite::dbDisconnect(connection)
+
+
+# Data Validation
+## Validate phone number
+### Supplier
+length(grepl("\\+44\\s\\d{3}\\s\\d{3}\\s\\d{4}", supplier$supplier_phone)) == nrow(supplier)
+### Consumer
+length(grepl("\\+44\\s\\d{3}\\s\\d{3}\\s\\d{4}", customer_basic_info$customer_phone)) == nrow(customer_basic_info)
+
+## Validate emails
+### Supplier
+length(grepl("@", supplier$supplier_email)) == nrow(supplier)
+### Consumer
+length(grepl("@", customer_basic_info$customer_email)) == nrow(customer_basic_info)
+
+
