@@ -7,7 +7,7 @@ on:
     branches: [ main ]
     paths:
     - 'Dataset/**'
-    - 'R_codelast/**'
+    - 'R_codelast'
     - '.github/workflows/**'
     
 jobs:
@@ -48,7 +48,7 @@ jobs:
       - name: Pull changes
         run: | 
           git pull.rebase true
-      - name: Push changes
+      - name: Push changes origin main
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.MY_TOKEN }}
