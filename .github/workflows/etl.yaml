@@ -37,10 +37,12 @@ jobs:
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
           git add .
-      
       - name: Commit files
         run: |
           git commit -m "Update Database"
+      - name: Pull changes
+        run: |
+          git pull --no rebase origin main
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
