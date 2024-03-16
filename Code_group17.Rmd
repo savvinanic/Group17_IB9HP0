@@ -9,15 +9,18 @@ The most crucial aspect of any thriving e-commerce business is the skilled manag
 ```{r}
 knitr::include_graphics("ER.jpeg")
 ```
-                         Figure 5: ER Diagram 
+
+```         
+                     Figure 5: ER Diagram 
+```
 
 The architecture of our e-commerce database is structured around seven key entities: customer, product, product category, supplier, promotion, transaction and delivery. These entities are intricately interconnected through a spectrum of relationships, including one-to-one, one-to-many, many-to-many, and self-referencing, in addition to a central ternary relationship.
 
 The “customer” entity, uniquely identified by “customer_id”, holds detailed attributes and forms a many-to-many relationship with “product” entity, signifying that customers can purchase multiple products, and products can be purchased by various customers.
 
-The “product” entity has “product_id” as the primary key, and is linked to “product category”. It has a one-to-many relationship where one category can encompass numerous products. Furthermore, “product” is similarly linked with “supplier” entity that is uniquely identified by “supplier_id”. It is connected through a one-to-many relationship, under the assumption that one supplier supplies numerous products.
+The “product” entity has “product_id” as the primary key and is linked to “product category”. It has a one-to-many relationship where one category can encompass numerous products. Furthermore, “product” is similarly linked with “supplier” entity that is uniquely identified by “supplier_id”. It is connected through a one-to-many relationship, under the assumption that one supplier supplies numerous products.
 
-The “product category” entity has a self-referencing relationship with “category_name” as the primary key. It is a hierarchical category structure with one-to-many relationship, as a single parent category can have multiple child categories, but each child category has only one parent category. For instance, “Beauty” is the parent category, and “Body Wash”, “Perfume” and “Hair Styling Product” are the child categories. Each of these child categories would refer back to “Beauty” as their parent, creating a self-referencing relationship.
+The “product category” entity has a self-referencing relationship with “category_name” as the primary key. It is a hierarchical category structure with one-to-many relationship, as a single parent category can have multiple child categories, but each child category has only one parent category. For instance, “Beauty” is the parent category, and “Body Wash”, “Perfume” and “Hair Styling Product” are the child categories. Each of these child categories would refer to “Beauty” as their parent, creating a self-referencing relationship.
 
 ```{r}
 knitr::include_graphics("Self-referencing.png")
@@ -25,10 +28,7 @@ knitr::include_graphics("Self-referencing.png")
 
 The “promotion” entity with “promo_code” as the primary key engages in a one-to-many relationship with “Customer” entity, under the assumption that one customer can be associated with one promo code, and many promo code can be associated with multiple customers.
 
-Central to the database, “transaction” captures the financial exchanges and is part of a ternary relationship with “customer” and “product” entities. The three are connected with “order” as the relationship. As mentioned above, the relationship between “customer” and “product” entities is many-to-many. The relationship between “customer” and “transaction” entities is an (N:1) relationship because a customer can have many transactions, but each transaction is associated with one customer. Similarly, “product” and “transaction” has a (M:1) relationship as each transaction involves one or multiple products, but each specific product purchase instance belongs to one transaction.
-
-When considering all three entities together in a ternary relationship (Figure 2): 
-• A “customer” can have multiple “transaction” (N:1), and within each transaction, multiple “products” can be involved (M:1). 
+Central to the database, “transaction” captures the financial exchanges and is part of a ternary relationship with “customer” and “product” entities. The three are connected with “order” relationship as is shown below: • A “customer” can have multiple “transaction” (N:1), and within each transaction, multiple “products” can be involved (M:1).
 
 • A “product” can be part of multiple “transaction” through different “customers” (M:N), but within a specific transaction, it is uniquely identified.
 
@@ -38,7 +38,7 @@ knitr::include_graphics("MN1 Ternary Relationship.png")
 
 Lastly, the “delivery” entity, with “delivery_id” as the primary key, correlates with “transaction” table in a one-to-one relationship, where each transaction results in a single delivery instance, ensuring that every purchase is accurately fulfilled.
 
-Each relationship sets are illustrated below:
+Each relationship sets are illustrated below based on each relationship between two entities:
 
 ```{r, eval=FALSE}
 knitr::include_graphics("Relationship Sets.jpeg")
@@ -46,9 +46,7 @@ knitr::include_graphics("Relationship Sets.jpeg")
 
 ## Assumptions
 
-To shape our database's logical structure, we have established several assumptions. We assume that each customer and supplier lists only one address within the United Kingdom. Deliveries are direct, unaffected by changes in day or time, handled by our company to ensure consistent customer service. A singular supplier relationship is presumed for each product, and customers receive one unique promo code applicable to their orders. All product prices are listed in GBP, and a delivery fee is structured to favor membership holders with free delivery service.
-
-Moreover, all the suppliers have UK addresses, with every customer and supplier allowed to add only one email address & contact number. All transactions have been completed, with delivery for orders placed before March 2024 assumed to have also been completed (hence no order_status), and the delivery process having started from June 2023. The delivery time is between 7am – 5pm, and each parcel is delivered to each customer’s unique address.
+To shape our database's logical structure, we have established several assumptions. First, we assume that our E-commerce business commenced in June 2023. We have a singular supplier relationship where a product is supplied by only one supplier. Each customer and supplier have only one address within the United Kingdom, with every customer and supplier allowed to add only one email address and contact number. Furthermore, our operating procedure presumed that the recipient name for each order corresponds to the name provided by the customer during the ordering process. All product prices are listed in GBP, and a free delivery fee is applied to membership holders. On the contrary, there’s a delivery fee for customers without membership. All deliveries are handled by our own company, and not by an external company. The delivery time is between 7am – 5pm, and each parcel is delivered to each customer’s unique address. All transactions are considered as completed, with no pending or failed statuses, whereas orders placed prior to March 2024 are presumed to be delivered and completed.
 
 ## Logical Schema
 
@@ -56,7 +54,7 @@ Upon completion of the ER diagram, we transition to represent each entity with a
 
 When designing the logical schema, a careful review of entity relationships is crucial to determine the need for additional tables. Relationships with cardinalities of 1:1 or N:1 typically do not require extra tables. However, in N:1 relationships, where multiple instances of one entity are associated with a single instance of another, the primary key from the entity on the “1” side transforms into a foreign key in the table on the “N” side. In our ER diagram, we observe that multiple products belong to one product_category (N:1), and multiple products are supplied by one supplier (N:1). Thus, the primary keys “category_name” and “supplier_id” of the weak side are both transferred to the product table as a foreign key. This is the same case for “promo_code” from the promotion table transferred to the customer table as a foreign key.
 
-1.  Customer customer (customer_id, promo_code, customer_firstname, customer_lastname, customer_title, customer_phone, customer_email, customer_membership, delivery_fee, customer_building, customer_street, customer_city, customer_postcode)
+1.  Customer customer ([customer_id]{.underline}, promo_code, customer_firstname, customer_lastname, customer_title, customer_phone, customer_email, customer_membership, delivery_fee, customer_building, customer_street, customer_city, customer_postcode)
 
 2.  Delivery delivery (tracking_number, trans_id, shipment_method, tracking_status, estimated_delivery_date, estimated_delivery_time, actual_delivery_date, actual_delivery_time, delivery_instructions,)
 
@@ -88,9 +86,7 @@ output:
     toc: yes
 ---
 
-
-\newpage 
-
+\newpage
 
 ```{r setup2, include=FALSE}
 library(readr)
@@ -117,6 +113,7 @@ all_files
 # Using R loops to check data integrity
 
 ## Check number of rows and columns
+
 ```{r loop,message=FALSE,warning=FALSE,attr.source='.numberLines'}
 all_files <- list.files("Dataset/")
 
@@ -136,6 +133,7 @@ for (variable in all_files) {
 ```
 
 ## Check the data structure
+
 ```{r loop1,message=FALSE,warning=FALSE,attr.source='.numberLines'}
 all_files <- list.files("Dataset/")
 
@@ -151,6 +149,7 @@ for (variable in all_files) {
 ```
 
 ## Check for NULL values
+
 ```{r loop2,message=FALSE,warning=FALSE,attr.source='.numberLines'}
 all_files <- list.files("Dataset/")
 
@@ -166,6 +165,7 @@ for (variable in all_files) {
 ```
 
 ## Check that each primary key is unique in each table except for order
+
 ```{r loop3,message=FALSE,warning=FALSE,attr.source='.numberLines'}
 all_files <- list.files("Dataset/")
 
@@ -179,8 +179,11 @@ for (variable in all_files) {
               hi," columns"))
 }
 ```
+
 ## For order dataset
+
 We have a composite primary key orderdate_dataset composed of 2 attribute and a composite primary key orderproductsinfo_dataset composed of 3 attribute, we'll check these one separately.
+
 ```{r getindividualvalues}
 orderdate_dataset <- read.csv("Dataset/hi_order_datetime_dataset.csv")
 orderproductsinfo_dataset <- read.csv("Dataset/hi_order_products_info_dataset.csv")
@@ -190,17 +193,18 @@ nrow(unique(orderproductsinfo_dataset[,1:3])) == nrow(orderproductsinfo_dataset)
 #length((unique(orders$cutomer_id)))
 #length((unique(orders$order_id)))
 ```
+
 The file: hi_order_dataset.csv has unique primary composite key TRUE columns
 
+# Load Files in an sqlite database
 
-# Load Files in an sqlite database 
 ```{r loadsqlite1,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
 #setup the connection
 connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
 ```
 
-
 # Drop tables
+
 ```{sql connection=connection}
 DROP TABLE IF EXISTS product
 ```
@@ -262,7 +266,9 @@ DROP TABLE IF EXISTS "order"
 ```
 
 # Create SQL tables
+
 ## product_category
+
 ```{sql connection=connection}
 -- product_category
 CREATE TABLE "product_category" ( 
@@ -276,6 +282,7 @@ SELECT * FROM "product_category";
 ```
 
 ## promotion
+
 ```{sql connection=connection}
 -- promotion
 CREATE TABLE "promotion" ( 
@@ -292,6 +299,7 @@ SELECT * FROM "promotion";
 ```
 
 ## supplier
+
 ```{sql connection=connection}
 -- supplier
 CREATE TABLE supplier ( 
@@ -306,12 +314,12 @@ CREATE TABLE supplier (
 ) ; 
 ```
 
-
 ```{sql connection=connection}
 SELECT * FROM "supplier";
 ```
 
 ## customer
+
 ```{sql connection=connection}
 -- customer
 CREATE TABLE "customer" ( 
@@ -332,12 +340,12 @@ CREATE TABLE "customer" (
 ) ; 
 ```
 
-
 ```{sql connection=connection}
 SELECT * FROM "customer";
 ```
 
 ## delivery
+
 ```{sql connection=connection}
 -- delivery
 CREATE TABLE "delivery" ( 
@@ -354,12 +362,12 @@ CREATE TABLE "delivery" (
 ); 
 ```
 
-
 ```{sql connection=connection}
 SELECT * FROM "delivery";
 ```
 
 ## product
+
 ```{sql connection=connection}
 -- product
 CREATE TABLE "product" ( 
@@ -382,8 +390,8 @@ CREATE TABLE "product" (
 SELECT * FROM "product";
 ```
 
-
 ## order
+
 ```{sql connection=connection}
 -- order
 CREATE TABLE "order" (
@@ -399,12 +407,12 @@ CREATE TABLE "order" (
 ) ; 
 ```
 
-
 ```{sql connection=connection}
 SELECT * FROM "order";
 ```
 
 ## transaction
+
 ```{sql connection=connection}
 -- transaction
 CREATE TABLE "transaction" (
@@ -421,11 +429,12 @@ CREATE TABLE "transaction" (
 SELECT * FROM "transaction";
 ```
 
-
-
 # Normalization to 3NF
+
 ## For customer
-1. customer_basic_info
+
+1.  customer_basic_info
+
 ```{sql connection=connection}
 -- customer_basic_info
 CREATE TABLE "customer_basic_info" ( 
@@ -448,7 +457,8 @@ CREATE TABLE "customer_basic_info" (
 SELECT * FROM customer_basic_info
 ```
 
-2. customer_membership
+2.  customer_membership
+
 ```{sql connection=connection}
 -- customer_membership
 CREATE TABLE "customer_membership" ( 
@@ -465,7 +475,9 @@ SELECT * FROM customer_membership
 ```
 
 ## For order
-1. order_products_info
+
+1.  order_products_info
+
 ```{sql connection=connection}
 -- order_products_info
 CREATE TABLE "order_products_info" (
@@ -483,7 +495,8 @@ CREATE TABLE "order_products_info" (
 SELECT * FROM order_products_info
 ```
 
-2. order_datetime
+2.  order_datetime
+
 ```{sql connection=connection}
 -- order_datetime
 CREATE TABLE "order_datetime" (
@@ -500,9 +513,10 @@ CREATE TABLE "order_datetime" (
 SELECT * FROM order_datetime
 ```
 
-
 ## For Delivery
-1. delivery_tracking
+
+1.  delivery_tracking
+
 ```{sql connection=connection}
 -- delivery_tracking
 CREATE TABLE "delivery_tracking" ( 
@@ -517,7 +531,8 @@ CREATE TABLE "delivery_tracking" (
 SELECT * FROM delivery_tracking
 ```
 
-2. estimated_delivery_date
+2.  estimated_delivery_date
+
 ```{sql connection=connection}
 -- estimated_delivery_date
 CREATE TABLE "estimated_delivery_date" ( 
@@ -534,7 +549,8 @@ CREATE TABLE "estimated_delivery_date" (
 SELECT * FROM estimated_delivery_date
 ```
 
-3. actual_delivery_date
+3.  actual_delivery_date
+
 ```{sql connection=connection}
 -- actual_delivery_date
 CREATE TABLE "actual_delivery_date" ( 
@@ -552,7 +568,9 @@ SELECT * FROM actual_delivery_date
 ```
 
 # Import csv files into SQL table
+
 ## For loop to read csv and then import into sql
+
 ```{r}
 # Read datasets
 #order
@@ -596,8 +614,8 @@ dbWriteTable(connection, "customer_membership", customer_membership_dataset, app
 dbWriteTable(connection, "customer_basic_info", customer_basic_info_dataset, append = TRUE, row.names = FALSE)
 ```
 
-
 ## Check the tables using select
+
 ```{sql connection=connection}
 SELECT * FROM "product" LIMIT 5
 ```
@@ -619,6 +637,7 @@ SELECT * FROM "transaction" LIMIT 5
 ```
 
 Order:
+
 ```{sql connection=connection}
 SELECT * FROM "order_datetime" LIMIT 5
 ```
@@ -628,6 +647,7 @@ SELECT * FROM "order_products_info" LIMIT 5
 ```
 
 Delivery
+
 ```{sql connection=connection}
 SELECT * FROM "actual_delivery_date" LIMIT 5
 ```
@@ -640,7 +660,8 @@ SELECT * FROM "delivery_tracking" LIMIT 5
 SELECT * FROM "estimated_delivery_date" LIMIT 5
 ```
 
-Customer: 
+Customer:
+
 ```{sql connection=connection}
 SELECT * FROM "customer_membership" LIMIT 5
 ```
@@ -650,7 +671,9 @@ SELECT * FROM "customer_basic_info" LIMIT 5
 ```
 
 # Calculated Field
+
 ## Transaction amount
+
 ```{sql connection=connection}
 SELECT o.order_id, prm.percentage_discount, m.delivery_fee, SUM(p.product_price*o.product_qty) AS order_price, ROUND(SUM(p.product_price* o.product_qty)*(1 - CAST(prm.percentage_discount AS REAL) / 100) + m.delivery_fee,2) AS trans_amount
 FROM "order_products_info" o, "product" p, "promotion" prm, "customer_basic_info" c, "customer_membership" m
@@ -661,6 +684,7 @@ GROUP BY
 ```
 
 # Store natively it in R
+
 ```{r}
 # Customer
 customer_membership <- dbReadTable(connection, "customer_membership")
@@ -682,22 +706,22 @@ supplier <- dbReadTable(connection, "supplier")
 transaction <- dbReadTable(connection, "transaction")
 ```
 
-
-
 # List tables
+
 ```{r listtables}
 RSQLite::dbListTables(connection)
 ```
 
-
-
 # Disconnect SQL
+
 ```{r disconnect}
 RSQLite::dbDisconnect(connection)
 ```
 
 # Data Validation
+
 ## Validate phone number
+
 ```{r getindividualvalues1}
 # Supplier
 length(grepl("\\+44\\s\\d{3}\\s\\d{3}\\s\\d{4}", supplier$supplier_phone)) == nrow(supplier)
@@ -706,13 +730,13 @@ length(grepl("\\+44\\s\\d{3}\\s\\d{3}\\s\\d{4}", customer_basic_info$customer_ph
 ```
 
 ## Validate emails
+
 ```{r getindividualvalues2}
 # Supplier
 length(grepl("@", supplier$supplier_email)) == nrow(supplier)
 # Consumer
 length(grepl("@", customer_basic_info$customer_email)) == nrow(customer_basic_info)
 ```
-
 
 ```{r}
 knitr::include_graphics("ER after Normalisation.jpeg")
