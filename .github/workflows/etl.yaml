@@ -37,7 +37,7 @@ jobs:
           Rscript R_codelast.R
       - name: Add files
         run: |
-          git config --local --unset-all "http.https://github.com/.extraheader"
+          git config --local --unset-all "https://github.com/.extraheader"
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
           git add .
