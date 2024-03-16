@@ -40,6 +40,16 @@ jobs:
       - name: Commit files
         run: |
           git commit -m "Update Database"
+      - name: Update R script
+        run: |
+          # Edit R script file
+          echo "Your R script modifications here" >> R_codelast.R
+          # Add changes to the staging area
+          git add R_codelast.R
+          # Commit changes
+          git commit -m "Update R script"
+          # Push changes to GitHub
+          git push origin main
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
