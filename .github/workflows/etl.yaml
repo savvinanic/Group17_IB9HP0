@@ -37,7 +37,7 @@ jobs:
           Rscript R_codelast.R
       - name: Add files
         run: |
-          git config --local --unset-all "https://github.com/.extraheader"
+          git config --local --unset-all "http.https://github.com/.extraheader"
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
           git add .
@@ -47,7 +47,7 @@ jobs:
 
       - name: Pull changes
         run: | 
-          git pull --rebase 
+          git pull 
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
