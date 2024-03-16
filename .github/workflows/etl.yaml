@@ -31,17 +31,12 @@ jobs:
       - name: Execute R script
         run: |
           Rscript R_codelast.R
-      - name: Update database with new data
-        run: | 
-          Rscript R/update_database.R database/hi_import.db
       - name: Add files
         run: |
           git config --local --unset-all "http.https://github.com/.extraheader"
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
           git add .
-          git commit -m "Update database and analysis results" || echo "No changes to commit"
-        
       - name: Commit files
         run: |
           git commit -m "Update Database"
