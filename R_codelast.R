@@ -98,7 +98,7 @@ RSQLite::dbExecute(connection, "DROP TABLE IF EXISTS 'order'")
 RSQLite::dbExecute(connection, "
                    CREATE TABLE product_category (
                    category_name VARCHAR(50) PRIMARY KEY,
-                   parent_category_id INT NULL
+                   parent_category_id CHAR NULL
                    );")
 
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM product_category;"))
