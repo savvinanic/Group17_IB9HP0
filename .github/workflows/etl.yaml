@@ -33,7 +33,7 @@ jobs:
           Rscript R_codelast.R
       - name: Update database with new data
         run: | 
-          Rscript R/update_database.R database/hi_import.db
+          Rscript database/hi_import.db
       - name: Add files
         run: |
           git config --local --unset-all "http.https://github.com/.extraheader"
