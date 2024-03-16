@@ -267,7 +267,7 @@ DROP TABLE IF EXISTS "order"
 -- product_category
 CREATE TABLE "product_category" ( 
   category_name VARCHAR(50) PRIMARY KEY,
-  parent_category_id INT NULL
+  parent_category_id CHAR NULL
 );
 ```
 
