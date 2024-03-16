@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Overview
 
 The most crucial aspect of any thriving e-commerce business is the skilled management of data. Recognizing this, our project simulates a real-world e-commerce data environment, where our primary goal is to construct a robust database that can not only handle the high volume of transactions characteristic of busy online platforms but also organize data effectively to streamline operations. By recreating a realistic e-commerce scenario, we aim to ensure that businesses remain adaptable, perceptive, and ahead in the fast-paced world of e-commerce.
@@ -10,9 +15,9 @@ The most crucial aspect of any thriving e-commerce business is the skilled manag
 knitr::include_graphics("ER.jpeg")
 ```
 
-```         
-                     Figure 5: ER Diagram 
-```
+        
+                                            Figure 5: ER Diagram 
+
 
 The architecture of our e-commerce database is structured around seven key entities: customer, product, product category, supplier, promotion, transaction and delivery. These entities are intricately interconnected through a spectrum of relationships, including one-to-one, one-to-many, many-to-many, and self-referencing, in addition to a central ternary relationship.
 
@@ -50,43 +55,18 @@ To shape our database's logical structure, we have established several assumptio
 
 ## Logical Schema
 
-Upon completion of the ER diagram, we transition to represent each entity with a distinct table in the database schema, with every attribute corresponding to a column within that table. Consequently, seven tables are established to represent the seven entities: product_category, promotion, supplier, customer, delivery, product and transaction.
+Upon completion of the ER diagram, we moved to the logical schema phase where each attribute corresponds to a column within that table. Consequently, seven tables are established to represent the seven entities: product_category, promotion, supplier, customer, delivery,  product and transaction.
 
-When designing the logical schema, a careful review of entity relationships is crucial to determine the need for additional tables. Relationships with cardinalities of 1:1 or N:1 typically do not require extra tables. However, in N:1 relationships, where multiple instances of one entity are associated with a single instance of another, the primary key from the entity on the “1” side transforms into a foreign key in the table on the “N” side. In our ER diagram, we observe that multiple products belong to one product_category (N:1), and multiple products are supplied by one supplier (N:1). Thus, the primary keys “category_name” and “supplier_id” of the weak side are both transferred to the product table as a foreign key. This is the same case for “promo_code” from the promotion table transferred to the customer table as a foreign key.
+When designing the logical schema, a careful review of entity relationships is crucial to determine any additional tables are required. Relationships with cardinalities of 1:1 or N:1 typically do not require extra tables or changes. However, in N:1 relationships, where multiple instances of one entity are associated with a single instance of another, the primary key from the entity on the “1”- weak side transforms into a foreign key in the table on the “N” – strong side. In our ER diagram, we observe that multiple products belong to one product_category (N:1), and multiple products are supplied by one supplier (N:1). Thus, the primary keys “category_name” and “supplier_id” of the weak side are both transferred to the product table as a foreign key. This is the same case for “promo_code” from the promotion table transferred to the customer table as a foreign key. Below is a list of logical schemas for all entities:
 
-1.  Customer customer ([customer_id]{.underline}, promo_code, customer_firstname, customer_lastname, customer_title, customer_phone, customer_email, customer_membership, delivery_fee, customer_building, customer_street, customer_city, customer_postcode)
+```{r}
+knitr::include_graphics("Logical Schema.png")
+```
 
-2.  Delivery delivery (tracking_number, trans_id, shipment_method, tracking_status, estimated_delivery_date, estimated_delivery_time, actual_delivery_date, actual_delivery_time, delivery_instructions,)
-
-3.  Supplier supplier (supplier_id, supplier_name, supplier_phone, supplier_email, supplier_building, supplier_street, supplier_city, supplier_postcode)
-
-4.  Transaction transaction (trans_id, order_id, trans_date, trans_time)
-
-5.  Product category product_category (category_name, parent_category_id)
-
-6.  Product product (product_id, supplier_id, category_name, product_name, product_weight, product_length, product_height, product_width, product_price, ,)
-
-7.  Promotion promotion (promo_code, promo_start_date, promo_expire_date, percentage_discount)
-
-The order relationship, which contains additional attributes, requires the creation of a separate table.
-
-8.  Order order (customer_id, product_id, order_id, product_qty, order_date, order_time)
 
 ## Part 1.2: Database Schema Creation
 
----
-title: "Group17_code"
-author: "Group17"
-date: "2024-03-13"
-output:
-  pdf_document:
-    toc: yes
-    number_sections: yes
-  word_document:
-    toc: yes
----
-
-\newpage
+The database schema creation process starts with establishing a connection and creating SQL tables for each entity, proactively dropping any pre-existing tables to avoid potential issues.
 
 ```{r setup2, include=FALSE}
 library(readr)
@@ -95,106 +75,6 @@ library(dplyr)
 library(DBI)
 ```
 
-# List all files
-
-```{r}
-all_files <- list.files("Dataset/")
-all_files
-```
-
-```{r block2,attr.source='.numberLines'}
-prefix <- "hi_"
-suffix <- "_dataset.csv"
-all_files <- gsub("hi_","",all_files)
-all_files <- gsub("_dataset.csv","",all_files)
-all_files
-```
-
-# Using R loops to check data integrity
-
-## Check number of rows and columns
-
-```{r loop,message=FALSE,warning=FALSE,attr.source='.numberLines'}
-all_files <- list.files("Dataset/")
-
-for (variable in all_files) {
-  this_filepath <- paste0("Dataset/",variable)
-  this_file_contents <- readr::read_csv(this_filepath)
-  
-  number_of_rows <- nrow(this_file_contents)
-  number_of_columns <- ncol(this_file_contents)
-  
-  print(paste0("The file: ",variable,
-              " has: ",
-              format(number_of_rows,big.mark = ","),
-              " rows and ",
-              number_of_columns," columns"))
-}
-```
-
-## Check the data structure
-
-```{r loop1,message=FALSE,warning=FALSE,attr.source='.numberLines'}
-all_files <- list.files("Dataset/")
-
-for (variable in all_files) {
-  this_filepath <- paste0("Dataset/",variable)
-  this_file_contents <- readr::read_csv(this_filepath)
-  data_structure<-str(this_file_contents)
-  
-  print(paste0(data_structure,
-               "The file: ",variable,
-              " has above data structure"))
-}
-```
-
-## Check for NULL values
-
-```{r loop2,message=FALSE,warning=FALSE,attr.source='.numberLines'}
-all_files <- list.files("Dataset/")
-
-for (variable in all_files) {
-  this_filepath <- paste0("Dataset/",variable)
-  this_file_contents <- readr::read_csv(this_filepath)
-  null<-sum(is.na(this_file_contents))
-  
-  print(paste0("The file: ",variable,
-              " has a total of ", null,
-              " NULL values"))
-}
-```
-
-## Check that each primary key is unique in each table except for order
-
-```{r loop3,message=FALSE,warning=FALSE,attr.source='.numberLines'}
-all_files <- list.files("Dataset/")
-
-for (variable in all_files) {
-  this_filepath <- paste0("Dataset/",variable)
-  this_file_contents <- readr::read_csv(this_filepath)
-  hi <- nrow(unique(this_file_contents[,1]))== nrow(this_file_contents)
-  
-  print(paste0("The file: ",variable,
-              " has unique primary key ",
-              hi," columns"))
-}
-```
-
-## For order dataset
-
-We have a composite primary key orderdate_dataset composed of 2 attribute and a composite primary key orderproductsinfo_dataset composed of 3 attribute, we'll check these one separately.
-
-```{r getindividualvalues}
-orderdate_dataset <- read.csv("Dataset/hi_order_datetime_dataset.csv")
-orderproductsinfo_dataset <- read.csv("Dataset/hi_order_products_info_dataset.csv")
-nrow(unique(orderdate_dataset[,1:2])) == nrow(orderdate_dataset)
-nrow(unique(orderproductsinfo_dataset[,1:3])) == nrow(orderproductsinfo_dataset)
-#sum(nrow(unique(orders[,1:2])))
-#length((unique(orders$cutomer_id)))
-#length((unique(orders$order_id)))
-```
-
-The file: hi_order_dataset.csv has unique primary composite key TRUE columns
 
 # Load Files in an sqlite database
 
@@ -567,6 +447,20 @@ CREATE TABLE "actual_delivery_date" (
 SELECT * FROM actual_delivery_date
 ```
 
+```{r}
+knitr::include_graphics("ER after Normalisation.jpeg")
+```
+
+  
+                              Figure 5: ER Diagram - After Normalisation
+
+# Part 2: Data Generation and Management
+
+## Part 2.1: Synthetic Data Generation
+
+We have initially generated synthetic data using Mockaroo, a random test data generator, and ChatGPT, a generative AI, which we downloaded the data into an excel sheet by updating the field names, data types, and options. However, there are some fields related to date and time which need to be generated with conditions. We use R code to generate these data to ensure the chronological order of date and time for promotion table, order table, transaction table and delivery table. 
+
+## Part 2.2: Data Import and Quality Assurance 
 # Import csv files into SQL table
 
 ## For loop to read csv and then import into sql
@@ -718,7 +612,112 @@ RSQLite::dbListTables(connection)
 RSQLite::dbDisconnect(connection)
 ```
 
-# Data Validation
+
+
+# Data Validation 
+
+# List all files
+
+```{r}
+all_files <- list.files("Dataset/")
+all_files
+```
+
+```{r block2,attr.source='.numberLines'}
+prefix <- "hi_"
+suffix <- "_dataset.csv"
+all_files <- gsub("hi_","",all_files)
+all_files <- gsub("_dataset.csv","",all_files)
+all_files
+```
+
+In our pursuit of ensuring data integrity, we implemented a comprehensive quality assurance process which included:
+
+## Check number of rows and columns
+
+```{r loop,message=FALSE,warning=FALSE,attr.source='.numberLines'}
+all_files <- list.files("Dataset/")
+
+for (variable in all_files) {
+  this_filepath <- paste0("Dataset/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+  
+  number_of_rows <- nrow(this_file_contents)
+  number_of_columns <- ncol(this_file_contents)
+  
+  print(paste0("The file: ",variable,
+              " has: ",
+              format(number_of_rows,big.mark = ","),
+              " rows and ",
+              number_of_columns," columns"))
+}
+```
+
+## Check the data structure
+
+```{r loop1,message=FALSE,warning=FALSE,attr.source='.numberLines'}
+all_files <- list.files("Dataset/")
+
+for (variable in all_files) {
+  this_filepath <- paste0("Dataset/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+  data_structure<-str(this_file_contents)
+  
+  print(paste0(data_structure,
+               "The file: ",variable,
+              " has above data structure"))
+}
+```
+
+## Check for NULL values
+
+```{r loop2,message=FALSE,warning=FALSE,attr.source='.numberLines'}
+all_files <- list.files("Dataset/")
+
+for (variable in all_files) {
+  this_filepath <- paste0("Dataset/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+  null<-sum(is.na(this_file_contents))
+  
+  print(paste0("The file: ",variable,
+              " has a total of ", null,
+              " NULL values"))
+}
+```
+
+## Check that each primary key is unique in each table except for order
+
+```{r loop3,message=FALSE,warning=FALSE,attr.source='.numberLines'}
+all_files <- list.files("Dataset/")
+
+for (variable in all_files) {
+  this_filepath <- paste0("Dataset/",variable)
+  this_file_contents <- readr::read_csv(this_filepath)
+  hi <- nrow(unique(this_file_contents[,1]))== nrow(this_file_contents)
+  
+  print(paste0("The file: ",variable,
+              " has unique primary key ",
+              hi," columns"))
+}
+```
+
+## For order dataset
+
+We have a composite primary key orderdate_dataset composed of 2 attribute and a composite primary key orderproductsinfo_dataset composed of 3 attribute, we'll check these one separately.
+
+```{r getindividualvalues}
+orderdate_dataset <- read.csv("Dataset/hi_order_datetime_dataset.csv")
+orderproductsinfo_dataset <- read.csv("Dataset/hi_order_products_info_dataset.csv")
+nrow(unique(orderdate_dataset[,1:2])) == nrow(orderdate_dataset)
+nrow(unique(orderproductsinfo_dataset[,1:3])) == nrow(orderproductsinfo_dataset)
+#sum(nrow(unique(orders[,1:2])))
+#length((unique(orders$cutomer_id)))
+#length((unique(orders$order_id)))
+#The file: hi_order_dataset.csv has unique primary composite key TRUE columns
+```
+
+
+In Customer dataset, there are e-mail and phone number columns, which required specific format checks. For e-mail, special characters “@” and ending domain must be validated. For phone number, IT must be ensured to have 10 numeric characters.
 
 ## Validate phone number
 
@@ -738,10 +737,16 @@ length(grepl("@", supplier$supplier_email)) == nrow(supplier)
 length(grepl("@", customer_basic_info$customer_email)) == nrow(customer_basic_info)
 ```
 
-```{r}
-knitr::include_graphics("ER after Normalisation.jpeg")
-```
+# Part 3: Data Pipeline Generation
 
-```         
-              Figure 5: ER Diagram - After Normalisation
-```
+## Part 3.1: GitHub Repository and Workflow Setup
+
+Our primary objective was to utilize GitHub repositories for efficient version control of our project. Initially, we transformed our R Markdown file into an R script, encompassing all the steps outlined in section 2.2. We proceeded to load the requisite files into a SQLite database, creating tables and importing datasets from the "Dataset" file. Despite solely utilizing the R script, we ensured all pertinent files were maintained within the repository. This was achieved by leveraging the repository's URL and executing commits and pushes whenever modifications were made. Subsequently, we established a new repository on GitHub and extended invitations to collaborators, granting them appropriate access levels.
+
+## Part 3.2: GitHub Actions for Continuous Integration
+
+For the implementation of GitHub Actions for Continuous Integration, we aimed to streamline our project's development workflow. This involved adopting continuous integration practices to automate tasks such as data validation, database updates, and data analysis. For instance, whenever changes occurred in the repository, such as importing new data, the updates were seamlessly integrated into the database, and relevant outputs were generated only if significant changes were detected. Scheduled workflows were set to run at regular intervals, such as every three hours, ensuring consistent and efficient execution of these tasks.
+
+Within workflow, we configured the R environment and cached any necessary R packages that were not already installed. Essential packages such as "ggplot" and "dplyr" were installed for data visualization purposes. The workflow then executed the R script, incorporating any changes made during the process. Finally, all modifications were committed to the local repository and subsequently pushed to the main branch using a unique access token for authentication. This comprehensive approach to CI enabled seamless integration of updates and ensured the project's integrity and efficiency.
+
+
