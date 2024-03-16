@@ -337,6 +337,8 @@ print(RSQLite::dbGetQuery(connection, "SELECT * FROM estimated_delivery_date LIM
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM customer_membership LIMIT 5"))
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM customer_basic_info LIMIT 5"))
 
+
+
 # Calculated Field: Transaction amount
 print(RSQLite::dbGetQuery(connection, "
                           SELECT o.order_id, 
@@ -356,7 +358,7 @@ print(RSQLite::dbGetQuery(connection, "
                           GROUP BY o.order_id;"))
 
 # Store natively it in R
-customer_memebership <- dbReadTable(connection, "customer_memebership")
+customer_membership <- dbReadTable(connection, "customer_membership")
 customer_basic_info <- dbReadTable(connection, "customer_basic_info")
 actual_delivery_date <- dbReadTable(connection, "actual_delivery_date")
 delivery_tracking <- dbReadTable(connection, "delivery_tracking")
