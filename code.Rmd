@@ -93,7 +93,7 @@ for (variable in all_files) {
 }
 ```
 For order dataset: we have a composite composed of 3 attribute, we'll check this one separately.
-```{r getindividualvalues}
+```{r getindividualvalues1}
 order <- read.csv("data_upload/hi_order_dataset.csv")
 nrow(unique(order[,1:3])) == nrow(order)
 #sum(nrow(unique(orders[,1:2])))
@@ -104,7 +104,7 @@ The file: hi_order_dataset.csv has unique primary composite key TRUE columns
 
 
 # Load Files in an sqlite database 
-```{r loadsqlite,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
+```{r loadsqlite2,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
 #setup the connection
 connection <- RSQLite::dbConnect(RSQLite::SQLite(),"database/hi_import.db")
 ```
@@ -383,7 +383,7 @@ PRAGMA table_info(actual_delivery_date);
 ```
 
 
-```{r loadsqlite,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
+```{r loadsqlite3,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
 #setup the connection
 connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
 ```
@@ -403,7 +403,7 @@ transaction_dataset <- readr::read_csv("data_upload/hi_transaction_dataset.csv")
 
 
 
-```{r getindividualvalues}
+```{r getindividualvalues4}
 order <- read.csv("data_upload/hi_order_dataset.csv")
 nrow(unique(order[,1:3])) == nrow(order)
 sum(nrow(unique(order[,1:2])))
@@ -415,7 +415,7 @@ my_data <- read.csv("data_upload/hi_delivery_dataset.csv")
 ```
 
 
-```{r loadsqlite,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
+```{r loadsqlite4,warning=FALSE,error=FALSE,message=FALSE,attr.source='.numberLines'}
 
 dbWriteTable(connection, "delivery",my_data , append = TRUE, row.names = FALSE)
 
