@@ -5,6 +5,9 @@ on:
 #    - cron: '0 */3 * * *' # Run every 3 hours
   push:
     branches: [ main ]
+    paths:
+    - 'Dataset/**'
+    - 'R_codelast/**'
     
 jobs:
   build:
