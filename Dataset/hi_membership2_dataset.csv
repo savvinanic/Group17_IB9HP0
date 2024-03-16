@@ -1,0 +1,1001 @@
+﻿customer_id,customer_membership,delivery_fee
+NAT-21446,membership,0
+MQV-12400,not membership,4.99
+MLY-44705,not membership,5.99
+RFE-59474,membership,0
+WBO-40739,membership,0
+PPP-76997,not membership,2.99
+AXT-62647,not membership,5.99
+CBF-75520,membership,0
+INZ-84177,not membership,6.99
+TWE-00676,not membership,5.99
+LGB-46086,membership,0
+SGR-65629,membership,0
+ADR-99282,membership,0
+YCG-95880,not membership,2.99
+RHJ-93702,not membership,3.99
+TNZ-37668,not membership,3.99
+ZKU-88534,membership,0
+THJ-67160,membership,0
+ZEC-71597,membership,0
+KRW-49337,not membership,5.99
+XOH-81381,membership,0
+FHM-91166,not membership,4.99
+BKO-86740,membership,0
+RTA-59329,membership,0
+AUN-48693,membership,0
+DAU-85706,membership,0
+HAG-07096,membership,0
+NXA-25791,not membership,3.99
+QWL-36165,membership,0
+OMI-23469,membership,0
+ZMG-30694,membership,0
+UTK-60300,not membership,6.99
+NXR-35045,membership,0
+IRT-45168,not membership,3.99
+HYP-42158,membership,0
+IDV-44801,membership,0
+OZR-11268,membership,0
+EKU-14560,membership,0
+DHT-25225,membership,0
+ZJR-11526,membership,0
+JDG-70980,membership,0
+YKQ-67131,not membership,4.99
+HUP-60554,not membership,2.99
+ZLR-94414,not membership,4.99
+NZY-50783,not membership,4.99
+DNK-63427,membership,0
+BVT-77023,membership,0
+SOT-54635,membership,0
+FMX-77248,not membership,4.99
+FGR-91292,membership,0
+WDD-19695,membership,0
+IEY-00277,membership,0
+NWH-68847,not membership,6.99
+TML-79989,not membership,2.99
+ASF-42284,membership,0
+EZN-05791,membership,0
+VQR-70460,not membership,4.99
+ZPY-93321,membership,0
+KCN-55575,not membership,6.99
+YXN-62968,membership,0
+TAE-31344,membership,0
+YXP-97902,not membership,4.99
+KBL-88890,membership,0
+IWI-07954,not membership,2.99
+NPO-10922,membership,0
+TXX-30500,not membership,4.99
+RWO-80666,membership,0
+TYU-56030,membership,0
+SSV-04596,not membership,4.99
+JVE-25104,membership,0
+DXQ-32741,membership,0
+KDY-34831,not membership,2.99
+YDY-00239,not membership,5.99
+MTC-94752,membership,0
+OPD-34081,not membership,4.99
+YSK-55846,not membership,4.99
+BMV-68778,not membership,2.99
+MVN-17758,membership,0
+LIZ-77971,membership,0
+YFL-42376,membership,0
+NYD-84187,membership,0
+QRV-60561,not membership,4.99
+ZBD-55118,membership,0
+XYD-54715,not membership,3.99
+RDW-54340,membership,0
+WFS-10864,membership,0
+MWK-21287,membership,0
+CYV-20980,not membership,4.99
+JZW-77084,not membership,5.99
+SWQ-82963,membership,0
+BFB-40374,not membership,2.99
+XBI-79339,membership,0
+YYJ-70942,membership,0
+DOE-95306,membership,0
+SXQ-85440,not membership,3.99
+LRO-88912,membership,0
+VBH-71807,membership,0
+YAG-27276,membership,0
+BWT-93319,membership,0
+JNT-37473,membership,0
+RJX-59133,not membership,5.99
+AAO-69393,not membership,5.99
+SEP-98075,membership,0
+IUM-38167,not membership,6.99
+QGL-64016,not membership,5.99
+QFS-92539,not membership,4.99
+SAX-35594,not membership,3.99
+KGP-14913,membership,0
+KJO-79467,membership,0
+ANQ-47077,membership,0
+FMD-09386,membership,0
+CSO-98321,membership,0
+KIC-74606,membership,0
+KUK-75858,not membership,3.99
+NBJ-76896,not membership,2.99
+JBG-18362,not membership,3.99
+KIQ-26936,membership,0
+CKS-79952,not membership,2.99
+AHN-01521,membership,0
+JCE-45562,not membership,4.99
+ICO-70881,not membership,2.99
+OIR-02901,membership,0
+BYY-33063,membership,0
+IRK-91133,not membership,3.99
+CLX-10763,membership,0
+QTD-36161,not membership,5.99
+NJG-83141,not membership,2.99
+ZHW-01464,not membership,3.99
+FZP-20032,membership,0
+QQM-84601,not membership,6.99
+JCK-00958,not membership,6.99
+MEE-58760,not membership,5.99
+VFI-41246,not membership,5.99
+YBH-36909,not membership,2.99
+IVN-92350,not membership,3.99
+YPI-57307,not membership,3.99
+YFO-19978,membership,0
+AIG-94772,not membership,5.99
+HPY-58978,membership,0
+YCD-17038,not membership,2.99
+SUM-52621,not membership,5.99
+XYS-91170,not membership,4.99
+GJY-20691,membership,0
+QHK-84327,membership,0
+DIK-58666,membership,0
+GGP-05008,not membership,2.99
+ZOX-95070,membership,0
+FNS-68804,membership,0
+LAE-39923,not membership,3.99
+VYA-02903,not membership,3.99
+ATW-85486,membership,0
+FLF-32710,not membership,5.99
+PYB-17242,not membership,3.99
+ZBE-31988,membership,0
+TPI-56312,not membership,3.99
+NXJ-62164,not membership,4.99
+JPG-04154,membership,0
+QQN-22815,membership,0
+YQO-96638,membership,0
+HML-31384,membership,0
+PYC-11977,membership,0
+YTR-17385,not membership,2.99
+TTJ-69717,not membership,5.99
+ECU-40063,not membership,3.99
+RJC-85748,membership,0
+UER-78778,not membership,2.99
+AEE-57374,not membership,3.99
+EVB-64319,membership,0
+XSI-38994,not membership,2.99
+QOD-92091,not membership,2.99
+UJQ-76271,membership,0
+SWK-13632,not membership,2.99
+EGF-95058,not membership,6.99
+IKG-51913,membership,0
+OMB-25925,membership,0
+IAY-69621,not membership,2.99
+HOP-91174,not membership,4.99
+JYS-93405,not membership,6.99
+RJS-95246,not membership,3.99
+YKW-20665,membership,0
+ANE-25345,not membership,2.99
+NFG-16496,not membership,4.99
+ATD-97183,membership,0
+CUK-73560,membership,0
+FIC-68232,not membership,2.99
+MAP-01921,membership,0
+IWK-57089,membership,0
+NSE-20975,membership,0
+TSH-82180,not membership,5.99
+YAI-38581,membership,0
+RPD-42853,not membership,2.99
+HUF-26956,not membership,5.99
+WKP-77030,not membership,5.99
+VME-26932,not membership,4.99
+LWD-28075,not membership,4.99
+CGY-42847,not membership,4.99
+ERN-41709,membership,0
+NQP-01307,not membership,6.99
+WRU-36151,membership,0
+NAF-07403,membership,0
+FNB-55327,membership,0
+QQW-02433,membership,0
+JBJ-10889,membership,0
+DEJ-43115,not membership,2.99
+UNF-05952,membership,0
+FHE-81934,not membership,2.99
+JJZ-04762,not membership,6.99
+LUT-10093,membership,0
+QEL-73614,not membership,2.99
+NJU-39008,membership,0
+RMN-33213,membership,0
+SQO-39829,not membership,3.99
+NPX-34883,membership,0
+PUC-34101,not membership,3.99
+OXT-27854,not membership,5.99
+OIO-75200,not membership,4.99
+KVB-79323,not membership,4.99
+PVX-71120,not membership,6.99
+KUY-60927,not membership,2.99
+SQK-49181,membership,0
+POA-90163,not membership,2.99
+LHM-97885,not membership,2.99
+TUJ-84214,not membership,6.99
+OQH-68492,membership,0
+JLM-75527,membership,0
+PML-24029,membership,0
+HGT-77486,membership,0
+GMN-47190,membership,0
+CNC-98914,not membership,4.99
+XYM-68988,membership,0
+YMC-82707,membership,0
+WEU-09776,membership,0
+WED-82020,not membership,6.99
+EHM-45282,not membership,2.99
+PDR-60940,membership,0
+PIH-41492,membership,0
+PZE-90750,not membership,5.99
+TSY-49316,not membership,2.99
+AZJ-73183,membership,0
+NVV-41982,not membership,4.99
+BNP-69939,membership,0
+EUQ-70863,membership,0
+OXE-64936,not membership,6.99
+AOY-81142,not membership,2.99
+BCX-52224,not membership,4.99
+UID-37750,not membership,4.99
+WJB-51886,membership,0
+TYV-02102,not membership,6.99
+NCJ-03725,not membership,6.99
+CHG-91394,not membership,6.99
+AHJ-34602,not membership,6.99
+ZBL-73893,not membership,5.99
+NSW-71189,not membership,5.99
+DKJ-08990,membership,0
+FXN-53707,not membership,2.99
+CMS-46190,membership,0
+KNT-07817,not membership,4.99
+OOJ-86402,not membership,2.99
+GFX-78117,membership,0
+JEC-17480,membership,0
+CAX-18205,membership,0
+CNF-54291,membership,0
+NCN-86554,membership,0
+LMF-11646,not membership,5.99
+FCU-04913,membership,0
+KQD-47610,not membership,5.99
+VKB-50061,membership,0
+UVR-08749,membership,0
+MDW-63676,membership,0
+SRG-18767,membership,0
+FLF-90589,not membership,3.99
+BNK-18629,membership,0
+QZN-66738,membership,0
+JPN-03467,membership,0
+LKO-10091,not membership,3.99
+YMX-43150,not membership,4.99
+RLD-23191,not membership,3.99
+KVR-15564,not membership,3.99
+RJF-64610,membership,0
+YIP-22314,not membership,2.99
+KHU-89932,not membership,6.99
+TPE-59637,membership,0
+QWD-86474,not membership,4.99
+MUR-99928,membership,0
+CHI-00080,not membership,3.99
+ZGW-67128,membership,0
+NPF-46161,membership,0
+NWS-72345,not membership,6.99
+PYA-10893,not membership,2.99
+LHR-70733,not membership,3.99
+AFJ-00690,not membership,5.99
+HTI-35044,membership,0
+CZT-84906,membership,0
+ZQH-27598,not membership,5.99
+FFO-80908,not membership,3.99
+FCZ-42180,membership,0
+GVE-88512,membership,0
+XNY-00134,membership,0
+FGB-33515,not membership,2.99
+QJF-53127,membership,0
+CEH-76229,membership,0
+KMO-59963,membership,0
+IUU-39926,not membership,4.99
+PIW-96466,membership,0
+XGG-22964,membership,0
+ZFV-53477,membership,0
+KVZ-53598,membership,0
+LOZ-11318,membership,0
+PZJ-80163,not membership,2.99
+KZR-40884,not membership,6.99
+UJG-93488,membership,0
+MET-60761,membership,0
+RTD-24834,membership,0
+NGC-71356,not membership,2.99
+XQM-99025,not membership,6.99
+HTW-70988,not membership,4.99
+MDA-39179,membership,0
+GZM-55936,not membership,4.99
+VSG-45761,membership,0
+GZK-39927,not membership,2.99
+SMV-44812,membership,0
+LSO-35724,not membership,2.99
+HSB-89545,not membership,2.99
+PCN-85238,not membership,3.99
+KCQ-71974,not membership,3.99
+TND-86192,membership,0
+TFD-83575,not membership,3.99
+HWB-70048,membership,0
+LSP-41166,membership,0
+ONJ-50066,not membership,4.99
+DMA-48071,membership,0
+GPO-77765,not membership,6.99
+JOK-17872,not membership,3.99
+HAK-97609,not membership,3.99
+JGU-09700,not membership,2.99
+BNS-34294,membership,0
+GMG-27242,not membership,2.99
+KYG-48550,membership,0
+MSW-28945,membership,0
+MAW-20885,membership,0
+HMG-03762,not membership,5.99
+ISQ-73998,membership,0
+NVR-12536,membership,0
+YEP-68998,membership,0
+RRD-24873,not membership,5.99
+FHR-67531,not membership,3.99
+KNN-45155,membership,0
+KWF-02995,not membership,4.99
+KKO-90053,not membership,5.99
+HVI-81558,not membership,4.99
+RLL-46382,membership,0
+FHJ-99777,membership,0
+OCG-16513,not membership,6.99
+RAP-04770,membership,0
+QPQ-39890,membership,0
+CGA-72580,membership,0
+DIG-60917,membership,0
+NSN-43932,not membership,6.99
+YZJ-89160,membership,0
+WDB-70289,not membership,2.99
+MCT-84721,membership,0
+VKE-08602,not membership,5.99
+EBM-24223,not membership,5.99
+QND-86180,membership,0
+VXB-85464,not membership,2.99
+MYW-58134,not membership,2.99
+QON-86088,membership,0
+PTW-55374,membership,0
+UEK-10018,not membership,5.99
+PWX-68684,membership,0
+NZR-48213,membership,0
+QOQ-09825,membership,0
+JJW-70882,membership,0
+KIA-16861,membership,0
+MRY-33349,not membership,4.99
+HES-57332,membership,0
+BQM-88379,membership,0
+UBM-00039,not membership,3.99
+REN-80394,not membership,4.99
+NVZ-72081,not membership,2.99
+KGG-31668,not membership,5.99
+MGO-93456,membership,0
+GAQ-55399,membership,0
+KEY-75125,membership,0
+AQS-39537,membership,0
+KNI-94352,not membership,5.99
+QPF-37951,membership,0
+RHJ-04583,not membership,5.99
+WIR-56372,membership,0
+PEF-11019,membership,0
+GQZ-78616,not membership,6.99
+ZAX-99759,not membership,3.99
+CYZ-85085,not membership,4.99
+SXK-51603,membership,0
+FYF-37427,not membership,3.99
+DTZ-93560,membership,0
+SUY-32448,membership,0
+DNG-76888,not membership,6.99
+SJS-13308,membership,0
+ZEP-41850,not membership,4.99
+YIR-40381,membership,0
+OSB-77289,not membership,2.99
+AHJ-12824,not membership,3.99
+TCR-35866,not membership,3.99
+IMJ-34713,membership,0
+EOU-65552,not membership,5.99
+NED-01548,membership,0
+HFI-23645,not membership,4.99
+TAJ-02999,membership,0
+SRY-05001,membership,0
+DGH-91780,membership,0
+JBG-30559,membership,0
+JBO-72192,membership,0
+RLF-61765,membership,0
+KBK-92783,membership,0
+TKP-27207,not membership,5.99
+PFL-59126,not membership,5.99
+ZQL-96692,not membership,4.99
+SGQ-71639,membership,0
+ZKR-28546,membership,0
+TAB-06662,membership,0
+BHX-81964,not membership,4.99
+BAO-19729,membership,0
+NOA-05708,not membership,6.99
+BLJ-90345,membership,0
+WHI-38063,not membership,6.99
+URE-25665,not membership,6.99
+GNX-30299,membership,0
+MML-63530,not membership,2.99
+CHW-16576,membership,0
+LSO-72726,not membership,3.99
+GIC-61064,not membership,5.99
+WBZ-78097,membership,0
+JFM-85395,membership,0
+VHG-94089,membership,0
+LLR-44247,not membership,6.99
+PWE-09599,not membership,5.99
+RJO-74023,membership,0
+BWU-36083,membership,0
+CFX-74437,not membership,2.99
+RSS-24301,not membership,4.99
+OBD-16148,not membership,6.99
+ONK-54643,not membership,5.99
+BYH-56417,membership,0
+TBC-63334,not membership,6.99
+ZCE-03639,membership,0
+GLF-84417,not membership,5.99
+XHL-69925,membership,0
+WXY-42655,not membership,4.99
+PSQ-15500,not membership,3.99
+DLH-35107,membership,0
+NOL-82275,not membership,5.99
+DJX-49835,membership,0
+PJP-77415,not membership,6.99
+BCN-11763,membership,0
+JWP-50932,membership,0
+ZDU-88623,membership,0
+VCX-71134,not membership,5.99
+MJA-98763,membership,0
+DKA-37599,membership,0
+DNA-70877,membership,0
+ALK-56502,membership,0
+JPF-38185,membership,0
+AOR-15481,not membership,5.99
+WFH-22922,membership,0
+AEP-92106,membership,0
+LRT-41739,not membership,5.99
+KDC-35155,membership,0
+KCW-90064,not membership,3.99
+GOC-19908,not membership,3.99
+AKJ-22711,not membership,4.99
+GCK-20702,membership,0
+NPX-29618,membership,0
+TGZ-58088,membership,0
+QRJ-44519,not membership,4.99
+WSS-89437,membership,0
+RJD-42100,membership,0
+FLB-60456,not membership,6.99
+CBY-03194,membership,0
+JAU-83073,not membership,4.99
+SSC-14235,not membership,2.99
+VIX-05568,membership,0
+TGE-89868,membership,0
+WDI-49050,not membership,2.99
+VEY-83651,not membership,5.99
+NGS-54999,not membership,4.99
+MZG-60599,membership,0
+WZY-70963,membership,0
+YWM-74722,not membership,3.99
+OMY-58623,not membership,2.99
+HIT-26425,membership,0
+YUU-44827,not membership,4.99
+XUD-36354,membership,0
+BCO-22668,not membership,2.99
+OHX-66506,membership,0
+RBJ-22883,not membership,2.99
+ZBX-82015,membership,0
+YQB-15670,membership,0
+XBA-65202,membership,0
+LZB-06903,not membership,2.99
+FSC-11574,membership,0
+TDK-54609,membership,0
+SZH-33276,not membership,4.99
+RUH-83684,membership,0
+DYU-51215,not membership,5.99
+GIR-16621,not membership,3.99
+KPP-31429,membership,0
+EXA-19057,not membership,6.99
+LQG-53982,not membership,6.99
+EJE-38655,not membership,2.99
+NRS-40908,not membership,5.99
+AOB-66270,membership,0
+NNN-20285,not membership,4.99
+LWP-57869,membership,0
+HBD-99816,membership,0
+AAN-28190,membership,0
+UXO-56285,membership,0
+QHY-80920,membership,0
+YOO-76691,not membership,4.99
+UAW-53168,membership,0
+RWW-28575,not membership,4.99
+PHJ-41104,membership,0
+FDT-82735,not membership,4.99
+BHQ-15247,membership,0
+OXZ-74933,membership,0
+LHX-00597,not membership,5.99
+LAH-79333,not membership,3.99
+ELR-67861,not membership,3.99
+VFG-76885,membership,0
+MLP-66980,membership,0
+GIR-48307,membership,0
+OWM-68843,not membership,2.99
+INP-93845,membership,0
+ZSE-60594,membership,0
+UKT-78314,membership,0
+EKY-98964,not membership,3.99
+NGU-54907,not membership,2.99
+SMF-49110,not membership,6.99
+EJI-39703,not membership,2.99
+VAU-34948,membership,0
+GUC-45683,not membership,3.99
+FTW-91813,membership,0
+TIJ-62907,not membership,4.99
+RCY-97051,not membership,3.99
+WCC-22489,membership,0
+HBL-63565,membership,0
+SWV-59927,membership,0
+JRK-60662,membership,0
+QWB-23086,membership,0
+GND-76940,membership,0
+AUI-63952,not membership,4.99
+AEH-55932,not membership,2.99
+MUJ-38537,not membership,5.99
+YNG-14680,not membership,4.99
+LMU-78759,not membership,2.99
+FII-44717,membership,0
+RKI-68446,membership,0
+CYC-77639,membership,0
+UEW-03565,not membership,5.99
+ENY-48834,membership,0
+CTA-73375,not membership,2.99
+MYN-12522,not membership,2.99
+WBR-75402,not membership,5.99
+ELY-26529,membership,0
+QKP-52017,not membership,4.99
+CIK-63950,membership,0
+ODB-00996,not membership,5.99
+GVT-12503,not membership,2.99
+HDV-58110,not membership,2.99
+HYY-10339,membership,0
+NTC-36262,membership,0
+TQX-30178,membership,0
+ZPO-61621,not membership,4.99
+OKK-71392,not membership,5.99
+PRY-55973,not membership,6.99
+XXD-36961,membership,0
+FEK-94166,membership,0
+GAJ-68319,not membership,5.99
+VKK-70651,not membership,4.99
+QZU-44497,not membership,2.99
+GQD-64084,not membership,6.99
+CGC-02957,not membership,6.99
+RED-49982,not membership,6.99
+INC-21330,membership,0
+IBI-33308,not membership,6.99
+YSE-30986,membership,0
+RID-03725,not membership,6.99
+AYZ-78016,membership,0
+PME-65620,membership,0
+JVH-89975,membership,0
+HCW-37454,not membership,4.99
+BIY-61464,membership,0
+UQG-20491,membership,0
+XQI-02704,membership,0
+PKN-31478,not membership,3.99
+OSC-74578,membership,0
+EOC-37292,membership,0
+WBL-72084,membership,0
+SSW-98369,not membership,3.99
+LUZ-12285,membership,0
+FQM-34715,membership,0
+CPF-34515,not membership,4.99
+KUC-02981,membership,0
+ZUU-36798,not membership,2.99
+MVA-27707,not membership,4.99
+FNT-52348,not membership,5.99
+GKD-77770,not membership,6.99
+STP-27222,membership,0
+FYP-13369,not membership,3.99
+FNZ-92907,not membership,2.99
+OHG-31254,not membership,5.99
+LOI-21074,membership,0
+OEI-47622,membership,0
+SOJ-27421,membership,0
+YJB-92377,not membership,3.99
+CGU-21947,not membership,4.99
+FIA-58646,not membership,5.99
+ZJU-40687,membership,0
+MPZ-49334,not membership,5.99
+RXH-26896,not membership,3.99
+BRA-14801,membership,0
+BNF-04840,not membership,6.99
+RCO-86573,not membership,4.99
+SRE-62807,membership,0
+HVF-82001,membership,0
+CMY-73211,not membership,2.99
+TZK-03516,membership,0
+HNB-99780,not membership,5.99
+UOY-19199,not membership,4.99
+TWX-83124,not membership,6.99
+CLZ-73501,not membership,6.99
+THU-52306,membership,0
+MRK-10741,membership,0
+UVI-08265,membership,0
+VNI-97812,not membership,4.99
+IUP-92858,not membership,2.99
+QOE-56926,not membership,4.99
+MNN-25551,not membership,3.99
+PTQ-44693,not membership,4.99
+RLE-08166,membership,0
+TMU-54039,not membership,5.99
+APV-51137,membership,0
+IWO-63601,not membership,4.99
+MLH-46206,not membership,3.99
+NML-75856,membership,0
+SZY-93506,not membership,2.99
+BMZ-37405,not membership,3.99
+PKX-19625,not membership,3.99
+MAN-10244,membership,0
+WGI-69035,not membership,2.99
+XKZ-58530,membership,0
+WON-71258,membership,0
+KRX-81184,membership,0
+YLH-27164,membership,0
+CSX-45498,not membership,4.99
+RAX-91538,not membership,4.99
+ESY-59787,membership,0
+LDJ-45639,membership,0
+MSW-94424,membership,0
+RLJ-24418,membership,0
+TVQ-28510,not membership,3.99
+YBK-45508,membership,0
+XBJ-83001,not membership,4.99
+INW-45170,membership,0
+GKP-31866,membership,0
+FIC-31239,not membership,6.99
+SWR-22948,not membership,5.99
+HNN-06871,membership,0
+VAK-56429,membership,0
+EUV-37583,not membership,5.99
+XIT-06945,membership,0
+ZSK-47154,not membership,3.99
+ZTZ-48921,membership,0
+NWE-81287,not membership,3.99
+MOD-39400,membership,0
+EVS-08313,membership,0
+YOX-67142,not membership,4.99
+JLM-52031,membership,0
+SDL-46841,membership,0
+CLD-40263,membership,0
+UWO-91784,not membership,5.99
+SYG-34855,membership,0
+LTW-21557,not membership,3.99
+NIP-54194,membership,0
+XAL-14169,membership,0
+RFQ-28525,membership,0
+POA-39002,membership,0
+DMT-26449,membership,0
+KDE-60370,membership,0
+XZU-22265,not membership,5.99
+GSW-85363,not membership,5.99
+FNG-65785,membership,0
+YDB-84461,membership,0
+VVB-13381,not membership,6.99
+DXG-80979,not membership,4.99
+SVK-49653,membership,0
+PCC-20414,not membership,5.99
+ZHY-91844,membership,0
+NRZ-66083,not membership,5.99
+IZD-59177,not membership,5.99
+FPH-26407,membership,0
+XMT-42650,not membership,4.99
+GEZ-08601,membership,0
+CMK-81724,not membership,2.99
+ZCA-17095,membership,0
+LYB-43537,membership,0
+EQZ-77600,not membership,3.99
+VTM-67273,not membership,3.99
+CLV-64992,membership,0
+IQS-64806,membership,0
+BRB-69417,membership,0
+RVL-67352,membership,0
+RST-87819,membership,0
+JHB-90449,membership,0
+EKI-49433,not membership,4.99
+CXD-69846,not membership,6.99
+YNB-59015,not membership,6.99
+UNT-42766,membership,0
+JNE-11789,membership,0
+KTI-75583,membership,0
+NST-01723,not membership,5.99
+CAU-17821,membership,0
+HFC-91910,not membership,3.99
+XSF-56164,membership,0
+TMG-69975,not membership,2.99
+QEP-19000,membership,0
+HKD-72489,not membership,2.99
+GVG-31198,not membership,4.99
+QDJ-65351,membership,0
+MCN-36443,not membership,6.99
+VLD-69354,not membership,5.99
+XZH-50612,membership,0
+FUE-17081,not membership,3.99
+ILK-79470,membership,0
+SQW-24281,membership,0
+SBY-75706,membership,0
+GSB-19226,not membership,2.99
+JWC-72611,not membership,6.99
+IDC-16848,membership,0
+ERK-10054,membership,0
+YVL-74334,membership,0
+WHJ-74901,not membership,4.99
+AMF-24071,membership,0
+SYA-95712,not membership,2.99
+FSV-28476,not membership,6.99
+TNT-21649,membership,0
+FSA-92921,membership,0
+PTQ-84464,not membership,3.99
+ZZY-87158,membership,0
+JID-04297,not membership,6.99
+EQJ-03602,not membership,4.99
+TSK-44407,membership,0
+ZID-45787,not membership,2.99
+ENL-08699,not membership,6.99
+TTE-91984,not membership,2.99
+UXZ-61637,not membership,6.99
+HEJ-02680,not membership,6.99
+RLK-34892,membership,0
+MFD-59251,not membership,5.99
+LOD-72540,not membership,5.99
+HBP-39672,membership,0
+RZR-36426,not membership,5.99
+YTS-92438,membership,0
+WHB-80863,not membership,4.99
+ZSZ-97439,membership,0
+CML-45140,membership,0
+CKW-63144,not membership,5.99
+BJF-99781,membership,0
+KWB-69863,membership,0
+MCP-10060,not membership,6.99
+GAH-23075,membership,0
+RSJ-25707,not membership,6.99
+DNC-33437,not membership,4.99
+TIK-07057,not membership,6.99
+WTM-36992,not membership,3.99
+NHT-71787,not membership,5.99
+MON-90496,not membership,3.99
+NGE-30140,not membership,2.99
+RDA-29217,membership,0
+ODE-83262,not membership,2.99
+GAE-67331,membership,0
+ZRQ-35183,not membership,5.99
+MQN-93376,membership,0
+CUM-39629,membership,0
+TDI-43067,not membership,2.99
+EQN-46999,not membership,6.99
+EGI-70415,membership,0
+RHI-04955,membership,0
+RRM-68277,membership,0
+KXM-93242,not membership,6.99
+BEE-58393,membership,0
+HIT-75017,membership,0
+ECY-09203,not membership,3.99
+SZT-49139,not membership,2.99
+WHB-10547,membership,0
+KPV-61572,not membership,6.99
+KOG-90198,not membership,3.99
+EKB-41598,membership,0
+FAN-11590,not membership,3.99
+DWI-58721,not membership,4.99
+OJK-72439,membership,0
+LVV-40616,membership,0
+SOD-35429,not membership,5.99
+DFJ-54300,not membership,2.99
+DMK-75014,membership,0
+CAL-31966,membership,0
+PSF-02302,membership,0
+NSC-67873,not membership,5.99
+GIJ-13728,membership,0
+DTZ-99095,not membership,5.99
+PZB-33922,membership,0
+XDU-55564,membership,0
+IYF-11697,membership,0
+RIR-91997,not membership,6.99
+CKE-62897,membership,0
+ZMI-98499,membership,0
+OTG-26459,not membership,4.99
+KKT-52545,membership,0
+TNY-83758,not membership,5.99
+ZCP-69930,not membership,4.99
+GEP-35815,not membership,3.99
+QTP-75328,not membership,3.99
+GJS-06694,membership,0
+COO-27600,membership,0
+VZB-72509,not membership,5.99
+OTQ-15578,not membership,2.99
+FXO-62640,membership,0
+SPX-35317,not membership,5.99
+DBH-35529,membership,0
+KDS-92306,not membership,2.99
+QRH-54590,not membership,2.99
+TZF-29528,not membership,4.99
+XIO-34283,membership,0
+ZNU-76614,membership,0
+VQJ-63757,not membership,6.99
+DTP-46176,not membership,3.99
+HTY-68744,membership,0
+HDY-38602,membership,0
+DTO-70277,membership,0
+FSD-17874,not membership,4.99
+HTU-65749,membership,0
+JIO-40700,membership,0
+PFX-15299,not membership,2.99
+CTC-93904,not membership,4.99
+VYN-36891,not membership,4.99
+WYZ-13395,membership,0
+PKP-82461,membership,0
+OOR-47875,membership,0
+ZIB-60373,not membership,4.99
+ZFZ-01642,membership,0
+SXP-33883,not membership,2.99
+DAP-69878,not membership,2.99
+VPK-72264,membership,0
+QFV-43348,membership,0
+LII-77388,not membership,2.99
+BZO-89081,membership,0
+GMF-32229,membership,0
+PWC-77972,membership,0
+KID-91654,not membership,5.99
+DWS-45315,membership,0
+NCU-43803,membership,0
+YJR-21509,not membership,2.99
+KNI-62550,membership,0
+CFX-22525,not membership,3.99
+PVP-19549,membership,0
+RBY-87869,not membership,4.99
+QPU-49717,membership,0
+ECL-71483,not membership,4.99
+KKC-76152,membership,0
+AEA-09221,not membership,6.99
+PJH-52727,membership,0
+VOA-65386,not membership,3.99
+JFU-70895,not membership,4.99
+NJU-66694,not membership,3.99
+DWT-43765,membership,0
+LGT-05815,membership,0
+MAD-00375,membership,0
+HYE-66745,membership,0
+ZVS-42143,not membership,6.99
+OCU-12142,not membership,5.99
+VTD-48908,membership,0
+TYI-19665,membership,0
+UDW-35134,membership,0
+ZVA-78061,membership,0
+HMV-04314,membership,0
+OUW-48835,membership,0
+PSK-11794,not membership,4.99
+JVC-81248,membership,0
+ZBQ-62002,not membership,6.99
+CMI-41430,membership,0
+AVH-73381,not membership,3.99
+LSL-84484,not membership,6.99
+XWU-19562,membership,0
+WZJ-48191,not membership,6.99
+RVP-12388,not membership,2.99
+PGQ-04447,membership,0
+SCB-46603,membership,0
+DUS-70505,not membership,2.99
+GEN-42720,membership,0
+XTQ-17477,membership,0
+WEY-69017,membership,0
+WXK-45707,membership,0
+OBL-32802,not membership,2.99
+TWH-54941,not membership,4.99
+RFM-18581,membership,0
+XNP-94128,membership,0
+LPB-73322,membership,0
+VJZ-97038,membership,0
+RBZ-83975,not membership,6.99
+MYO-10937,membership,0
+KZH-92587,membership,0
+JRI-37767,membership,0
+LCJ-06624,not membership,3.99
+JIR-52209,not membership,2.99
+WTN-50267,not membership,5.99
+SVM-65960,not membership,2.99
+HHJ-10920,membership,0
+FHC-82833,not membership,3.99
+JCD-49823,not membership,6.99
+ECM-42044,membership,0
+IWL-78224,not membership,2.99
+UFZ-43645,membership,0
+FHG-48761,membership,0
+XUT-07777,membership,0
+KGJ-47389,membership,0
+JSU-54404,membership,0
+PAF-44089,membership,0
+ECY-19008,not membership,4.99
+APZ-62721,membership,0
+QGM-02495,membership,0
+EUC-73466,not membership,2.99
+SOS-26308,not membership,5.99
+WRO-25440,not membership,5.99
+TAW-20995,membership,0
+IDM-02996,not membership,3.99
+RGK-25463,not membership,3.99
+IQK-30834,membership,0
+ZMX-00589,membership,0
+STD-13053,membership,0
+XGN-27249,not membership,6.99
+YPV-99461,membership,0
+VYV-53126,membership,0
+BMK-50135,not membership,6.99
+MCZ-48810,membership,0
+FWW-75045,not membership,2.99
+KMJ-86619,membership,0
+CRH-36795,not membership,3.99
+OIY-04946,not membership,3.99
+PSP-25466,not membership,6.99
+ZAI-77700,membership,0
+DFS-61126,not membership,4.99
+YDB-07606,membership,0
+QDW-39457,not membership,5.99
+LZQ-00800,not membership,3.99
+WDI-23408,not membership,6.99
+RCG-19587,not membership,2.99
+XYR-46722,membership,0
+LCB-40202,not membership,2.99
+HWZ-79065,not membership,3.99
+CDF-95265,not membership,5.99
+GPA-18973,membership,0
+FDQ-77859,membership,0
+AEZ-15238,not membership,5.99
+FKY-96737,membership,0
+QSC-51708,membership,0
+FCR-48167,not membership,5.99
+PTO-79766,not membership,4.99
+KUJ-72930,not membership,2.99
+YPZ-43846,not membership,3.99
+FFA-31312,not membership,4.99
+DTE-01299,not membership,5.99
+RHA-97388,membership,0
+EHH-13282,membership,0
+FGG-98017,not membership,6.99
+DMK-65903,membership,0
+LIC-37864,membership,0
+IYD-73813,not membership,4.99
+ZNI-36130,membership,0
+UQN-71766,membership,0
+FRE-56900,membership,0
+ZLW-86229,membership,0
+GOK-32300,not membership,6.99
+ZCN-40337,membership,0
+VUC-61834,membership,0
+WHL-61244,not membership,2.99
+WKT-08100,membership,0
+ZSF-85245,membership,0
+BQY-45193,not membership,4.99
+UUC-42190,membership,0
+RWV-40680,not membership,4.99
+DUB-02729,membership,0
+OXP-30840,membership,0
+TWC-17881,not membership,6.99
+XDA-61402,not membership,5.99
+EJM-74328,membership,0
+YSG-63195,not membership,6.99
+WVI-06067,membership,0
+FCF-82879,not membership,3.99
+SNG-02319,not membership,3.99
+TOT-87420,membership,0
