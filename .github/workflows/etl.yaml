@@ -30,7 +30,7 @@ jobs:
       
       - name: Execute R script
         run: |
-          Rscript R/R_code.R
+          Rscript R_codelast.R
       - name: Update database with new data
         run: | 
           Rscript R/update_database.R database/hi_import.db
