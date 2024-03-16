@@ -4,7 +4,7 @@ on:
 #  schedule:
 #    - cron: '0 */3 * * *' # Run every 3 hours
   push:
-    branches: [ main ]
+    branches: [ master ]
     paths:
     - 'Dataset/**'
     - 'R_codelast'
@@ -47,9 +47,9 @@ jobs:
 
       - name: Pull changes
         run: | 
-          git pull.rebase true
-      - name: Push changes origin main
+          git pull --no-rebase origin master
+      - name: Push changes 
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.MY_TOKEN }}
-          branch: main
+          branch: master
