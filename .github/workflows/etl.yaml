@@ -40,6 +40,7 @@ jobs:
       - name: Commit files
         run: |
           git commit -m "Update Database"
+    
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
