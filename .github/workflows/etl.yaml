@@ -37,14 +37,10 @@ jobs:
           Rscript R_codelast.R
       - name: Add files
         run: |
-          git config --global --unset-all "http.https://github.com/.extraheader"
-          git config --global user.email "savvinanicolaou@gmail.com"
-          git config --global user.name "savvinanic"
-      - name: Debugging
-        run: |
-          pwd
-          ls -l
-          git status
+         git config --global --unset-all "http.https://github.com/.extraheader" || true
+         git config --global user.email "savvinanicolaou@gmail.com"
+         git config --global user.name "savvinanic"
+         git add .
       - name: Commit files
         run: |
           git commit -m "Update Database"
