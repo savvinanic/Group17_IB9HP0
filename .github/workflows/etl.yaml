@@ -40,7 +40,11 @@ jobs:
           git config --global --unset-all "http.https://github.com/.extraheader"
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
-          git add .
+      - name: Debugging
+        run: |
+          pwd
+          ls -l
+          git status
       - name: Commit files
         run: |
           git commit -m "Update Database"
