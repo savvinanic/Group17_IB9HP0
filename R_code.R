@@ -1,3 +1,24 @@
+#install.packages("readr")
+#install.packages("RSQLite")
+#install.packages("dplyr")
+#install.packages("DBI")
+
+#Upload required packages 
+#install.packages("ggplot2")
+#install.packages("emmeans")
+#install.packages("gridExtra")
+#install.packages("knitr")
+#install.packages("magick")
+#install.packages("grid")
+
+#library(ggplot2)
+
+#library(emmeans)
+library(gridExtra)
+library(knitr)
+library(magick)
+library(grid)
+
 library(readr)
 library(RSQLite)
 library(dplyr)
@@ -599,17 +620,6 @@ length(grepl("@", customer_basic_info$customer_email)) == nrow(customer_basic_in
 
 #Plot graphs
 
-#Upload required packages 
-library(ggplot2)
-library(readr)
-library(RSQLite)
-library(dplyr)
-library(DBI)
-library(ggplot2)
-library(tidyverse)
-library(emmeans)
-library(gridExtra)
-library(knitr)
 
 
 # 1. Product Category vs Count
@@ -848,8 +858,7 @@ GROUP BY p.product_name
 ORDER BY revenue DESC LIMIT 5;
 ")
 
-library(magick)
-library(grid)
+
 table <- tableGrob(Top5_Products_Revenue)
 img <- image_graph(width = 800, height = 600, res = 96)
 grid.draw(table)
