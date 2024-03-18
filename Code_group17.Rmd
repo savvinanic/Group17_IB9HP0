@@ -783,7 +783,7 @@ RSQLite::dbListTables(connection)
 
 ## Part 3.1: GitHub Repository and Workflow Setup
 
-The purpose was to automate the process of updating and maintaining an R project on GitHub, making it easier for our team to collaborate and keep our project up to date. 
+The purpose was to automate the process of updating and maintaining an R project on GitHub, making it easier for our team to collaborate and keep our project up to date. By commiting changes and pressing "push" and "pull" we managed to synchronize the files "R
 
 The name of the code is "Update Repo with result"
 
