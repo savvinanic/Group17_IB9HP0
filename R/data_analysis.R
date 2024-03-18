@@ -1,4 +1,3 @@
-
 #Plot graphs
 #Upload required packages 
 library(ggplot2)
@@ -7,7 +6,7 @@ library(RSQLite)
 library(dplyr)
 library(DBI)
 library(ggplot2)
-library(tidyverse)
+#library(tidyverse)
 library(emmeans)
 library(gridExtra)
 library(knitr)
@@ -122,9 +121,9 @@ g4 <- ggplot(avg_order_quantity, aes(x = month, y = avg_qty, fill = month)) +
 
 ggsave("figures/Product Category&Avg quantity per month.png", plot = g4, width = 10, height = 6)
 
-# 5. Number of Orders Placed Each Hour of the Day
+# Retrieve data from the "order_datetime" table
+order_copyforanalyses <- DBI::dbGetQuery(connection, "SELECT * FROM order_datetime")
 
-order_copyforanalyses <- order_datetime
 
 # Convert 'order_time' column to POSIXct format
 order_copyforanalyses$order_time <- as.POSIXct(order_copyforanalyses$order_time, format = "%H:%M:%S")
@@ -149,7 +148,7 @@ ggsave("figures/Orders by hour.png", plot = g5, width = 10, height = 6)
 
 
 # 6. Percentage of Customers Having a Membership
-membership <- customer_membership %>%
+membership <- DBI::dbGetQuery(connection, "SELECT * FROM customer_membership") %>%
   group_by(customer_membership) %>%
   summarise(count = n()) %>%
   mutate(total = sum(count)) %>%
