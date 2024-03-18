@@ -34,7 +34,7 @@ jobs:
       
       - name: Execute R script
         run: |
-          Rscript R_code.R
+          Rscript R/R_code.R
       - name: Add files
         run: |
          git config --global --unset-all "http.https://github.com/.extraheader" || true
