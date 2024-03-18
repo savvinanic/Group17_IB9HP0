@@ -7,7 +7,7 @@ on:
     branches: [ master ]
     paths:
     - '.github/workflows/**'
-    - 'R_codelast'
+    - 'R_code'
     - 'Dataset/**'
   
 jobs:
@@ -34,7 +34,7 @@ jobs:
       
       - name: Execute R script
         run: |
-          Rscript R_codelast.R
+          Rscript R_code.R
       - name: Add files
         run: |
          git config --global --unset-all "http.https://github.com/.extraheader" || true
