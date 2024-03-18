@@ -419,3 +419,13 @@ length(grepl("@", supplier$supplier_email)) == nrow(supplier)
 length(grepl("@", customer_basic_info$customer_email)) == nrow(customer_basic_info)
 
 
+
+#Plot graphs
+
+# Save the plot as an image
+this_filename_date <- as.character(Sys.Date())
+this_filename_time <- as.character(format(Sys.time(), format = "%H_%M"))
+ggsave(paste0("figures/Category_Sales_", this_filename_date, "_", this_filename_time, ".png"))
+
+
+

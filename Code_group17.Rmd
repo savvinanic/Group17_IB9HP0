@@ -778,28 +778,27 @@ RSQLite::dbListTables(connection)
 
 
 
-
 # Part 3: Data Pipeline Generation
 
 ## Part 3.1: GitHub Repository and Workflow Setup
 
-The purpose was to automate the process of updating and maintaining an R project on GitHub, making it easier for our team to collaborate and keep our project up to date. By commiting changes and pressing "push" and "pull" we managed to synchronize the files "R
-
-The name of the code is "Update Repo with result"
+The purpose was to automate the process of updating and maintaining an R project on GitHub, making it easier for our team to collaborate and keep our project up to date. By committing changes and pressing "push" and "pull" we managed to synchronize the files "R_code.R" and "Dataset" where we stored our csv files. Despite solely utilizing the R script, we ensured all pertinent files were maintained within the repository. This was achieved by leveraging the repository's URL and executing commits and pushes whenever modifications were made. The URL is this: https://github.com/savvinanic/Group17_IB9HP0.
 
 
 
-
-
-
-
-Our primary objective was to utilize GitHub repositories for efficient version control of our project. Initially, we transformed our R Markdown file into an R script, encompassing all the steps outlined in from parts 1.2 - 2.2. We proceeded to load the requisite files into a SQLite database, creating tables and importing datasets from the "Dataset" file. Despite solely utilizing the R script, we ensured all pertinent files were maintained within the repository. This was achieved by leveraging the repository's URL and executing commits and pushes whenever modifications were made. Subsequently, we established a new repository on GitHub and extended invitations to collaborators, granting them appropriate access levels.
+```{r echo=FALSE}
+knitr::include_graphics("GitHub.png")
+```
 
 ## Part 3.2: GitHub Actions for Continuous Integration
 
-For the implementation of GitHub Actions for Continuous Integration, we aimed to streamline our project's development workflow. This involved adopting continuous integration practices to automate tasks such as data validation, database updates, and data analysis. For instance, whenever changes occurred in the repository, such as importing new data, the updates were seamlessly integrated into the database, and relevant outputs were generated only if significant changes were detected. Scheduled workflows were set to run at regular intervals, such as every three hours, ensuring consistent and efficient execution of these tasks.
+We commence by establishing the workflow, which activates in response to any push or pull requests. Once the equired R environment and packages are installed, it reads the R script file named "R_code.R". This file orchestrates a spectrum of operations encompassing SQL table creation, data validation, database updates, and visualization tasks. All generated graphs, pivotal for fostering informed decision-making and strategic planning within our E-commerce realm, are stored within the "figures" folder. Consequently, with each alteration, the workflow seamlessly automates all activities delineated within the R script file.
 
-Within workflow, we configured the R environment and cached any necessary R packages that were not already installed. Essential packages such as "ggplot" and "dplyr" were installed for data visualization purposes. The workflow then executed the R script, incorporating any changes made during the process. Finally, all modifications were committed to the local repository and subsequently pushed to the main branch using a unique access token for authentication. This comprehensive approach to CI enabled seamless integration of updates and ensured the project's integrity and efficiency.
+All changes are systematically pushed to the master branch,  requiring the use of our unique token for authentication.Notably, this workflow operates on a recurring schedule, executing every 3 hours, ensuring our project's continuous alignment with any changes or updates.
+
+```{r echo=FALSE}
+knitr::include_graphics("")
+```
 
 The code is added below:
 
