@@ -1010,11 +1010,10 @@ In this section we created diverse graphs including bar, line and pie charts and
 8. Sales by Membership Status
 9. Order delay - Membership
 10. Monthly Revenue by City
-11. Top 5 Products by Sales Volume and Total Sales Profit After Discount
-12. Top 5 products sold and percentage discount applied
-13. Top 10 customers with the highest transaction amount, percentage discount applied and products bought
-14. Supplier sales volume
-15. Supplier revenue
+11. Product Name and Category of the top 5 Products with the highest revenue
+12. Top 10 customers with the highest transaction amount, percentage discount applied and products bought
+13. Supplier sales volume
+14. Supplier revenue
 
 
 ```{r echo=FALSE}
@@ -1374,22 +1373,10 @@ ggplot(City_vs_Revenue, aes(x = month, y = total_revenue_month, group = customer
 
 - Overall, there are two peaks across the five cities. One around June of 2023, another one in October of 2023. London seems to consistently have the highest total revenue compared with the other cities. On the contrary, the rest follows a minimum fluctuation across seasons. 
 
-# 11. Top 5 Products by Sales Volume and Total Sales Profit After Discount
 
-The table showcases the top-selling products, elucidating the financial impact of promotions on sales and informing strategic decisions regarding pricing and discount strategies. Additionally, it offers insights into inventory optimization and potential marketing strategies. Lastly, it displays the total profit derived from these products, providing a comprehensive overview of their performance.
+# 11. Product Name and Category of the top 5 Products with the highest revenue
 
-```{sql connection=connection}
-SELECT p.product_name, SUM(o.product_qty) AS sales_volume, ROUND(SUM(p.product_price* o.product_qty)*(1 - CAST(prm.percentage_discount AS REAL) / 100),2) AS total_sales_profit
-FROM "order_products_info" o, "product" p, "promotion" prm, "customer_basic_info" c, "customer_membership" m
-WHERE o.customer_id = m.customer_id AND o.product_id = p.product_id AND c.promo_code = prm.promo_code AND m.customer_id = c.customer_id
-GROUP BY p.product_name
-ORDER BY total_sales_profit DESC LIMIT 5;
-```
-
-
-# 12. Top 5 products sold and percentage discount applied
-
-This table helps us to understand which products have the highest revenue and their performance alongside promotions. These insights are an indication of product offerings and promotional strategies that maximize profitability.
+The table showcases the top-selling products based on their revenue, providing a comprehensive overview of their performance.These insights are an indication of product offerings that maximize profitability.
 
 
 ```{sql connection=connection}
@@ -1400,7 +1387,7 @@ GROUP BY p.product_name
 ORDER BY revenue DESC LIMIT 5;
 ```
 
-# 13. Top 10 customers that had the highest transaction amount, the percentage discount applied, and which products they bought
+# 12. Top 10 customers that had the highest transaction amount, the percentage discount applied, and which products they bought
 
 This table is generated to identify top-spending customers, evaluate the effectiveness of promotions, and understand product preferences.
 ```{sql connection=connection}
@@ -1419,7 +1406,7 @@ This table is generated to identify top-spending customers, evaluate the effecti
   LIMIT 10
 ```
 
-# 14. Supplier sales volume
+# 13. Supplier sales volume
 
 It shows the top-selling products from the highest-performing suppliers in terms of sales volume. It provides insights into sales volume and supplier performance crucial for inventory management and strategic supplier relationships.
 
@@ -1431,7 +1418,7 @@ GROUP BY p.supplier_id
 ORDER BY sales_volume DESC LIMIT 5;
 ```
 
-# 15. Supplier revenue
+# 14. Supplier revenue
 
 The table shows the highest revenue achieved by highlighting the product and category name. This is an indication to which suppliers offer the most profitable products within our E-commerce.
 ```{sql connection=connection}
