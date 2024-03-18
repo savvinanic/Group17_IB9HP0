@@ -1,3 +1,4 @@
+
 name: Update Repo with result
 
 on:
@@ -5,9 +6,6 @@ on:
 #    - cron: '0 */3 * * *' # Run every 3 hours
   push:
     branches: [ main ]
-    paths:
-    - 'Dataset/**'
-    - 'R_codelast/**'
     
 jobs:
   build:
@@ -29,26 +27,17 @@ jobs:
       - name: Install packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite"))'
-      
+          Rscript -e 'install.packages(c(("ggplot2", "dplyr", "readr", "RSQLite", "DBI", "emmeans", "gridExtra", "knitr" ))'
       - name: Execute R script
         run: |
-          Rscript R_codelast.R
+          Rscript R/R_code.R
+          Rscript R/data_analysis.R
       - name: Add files
         run: |
-          git config --local --unset-all "http.https://github.com/.extraheader"
           git config --global user.email "savvinanicolaou@gmail.com"
           git config --global user.name "savvinanic"
-          git add .
+          git add --all figures/
       - name: Commit files
         run: |
-          git commit -m "Update Database"
-
-      - name: Pull changes
-        run: | 
-          git pull --rebase 
+          git commit -m "updates"
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.MY_TOKEN }}
-          branch: main
