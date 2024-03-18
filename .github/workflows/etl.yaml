@@ -41,13 +41,15 @@ jobs:
          git config --global user.email "savvinanicolaou@gmail.com"
          git config --global user.name "savvinanic"
          git add --all database/
+
       - name: Commit files
         run: |
-          git commit -m "Update Database"
+         git commit -m "Update Database"
+
       - name: Execute R script analysis
         run: |
           Rscript R/data_analysis.R
-      - name: Add files
+      - name: Add plots
         run: |
          git config --global --unset-all "http.https://github.com/.extraheader" || true
          git config --global user.email "savvinanicolaou@gmail.com"
