@@ -7,7 +7,7 @@ on:
     branches: [ master ]
     paths:
     - '.github/workflows/**'
-    - 'R_codelast'
+    - 'R_code'
     - 'Dataset/**'
   
 jobs:
@@ -30,11 +30,11 @@ jobs:
       - name: Install packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite"))'
+          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite", "tidyverse"))'
       
       - name: Execute R script
         run: |
-          Rscript R_codelast.R
+          Rscript R_code.R
       - name: Add files
         run: |
          git config --global --unset-all "http.https://github.com/.extraheader" || true
