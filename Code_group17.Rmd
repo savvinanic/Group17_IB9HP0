@@ -1,9 +1,16 @@
 ---
+title: "Group17_code"
+author: "Group17"
+date: "2024-03-13"
 output:
-  pdf_document: default
-  html_document: default
-  word_document: default
+  pdf_document:
+    toc: yes
+    number_sections: yes
+  word_document:
+    toc: yes
 ---
+
+\newpage
 # Overview
 
 The most crucial aspect of any thriving e-commerce business is the skilled management of data. Recognizing this, our project simulates a real-world e-commerce data environment, where our primary goal is to construct a robust database that can not only handle the high volume of transactions characteristic of busy online platforms but also organize data effectively to streamline operations. By recreating a realistic e-commerce scenario, we aim to ensure that businesses remain adaptable, perceptive, and ahead in the fast-paced world of e-commerce.
@@ -934,7 +941,7 @@ We commence by establishing the workflow, which activates in response to any pus
 All changes are systematically pushed to the master branch,  requiring the use of our unique token for authentication.Notably, this workflow operates on a recurring schedule, executing every 3 hours, ensuring our project's continuous alignment with any changes or updates.
 
 ```{r echo=FALSE}
-knitr::include_graphics("")
+#knitr::include_graphics("")
 ```
 
 The code is added below:
@@ -1012,8 +1019,8 @@ In this section we created diverse graphs including bar, line and pie charts and
 10. Monthly Revenue by City
 11. Product Name and Category of the top 5 Products with the highest revenue
 12. Top 10 customers with the highest transaction amount, percentage discount applied and products bought
-13. Supplier sales volume
-14. Supplier revenue
+13. Suppliers with the highest sales volume
+14. Suppliers with the highest revenue
 
 
 ```{r echo=FALSE}
@@ -1387,7 +1394,7 @@ GROUP BY p.product_name
 ORDER BY revenue DESC LIMIT 5;
 ```
 
-# 12. Top 10 customers that had the highest transaction amount, the percentage discount applied, and which products they bought
+# 12. Top 10 customers that had the highest transaction amount and the percentage discount applied
 
 This table is generated to identify top-spending customers, evaluate the effectiveness of promotions, and understand product preferences.
 ```{sql connection=connection}
@@ -1406,7 +1413,7 @@ This table is generated to identify top-spending customers, evaluate the effecti
   LIMIT 10
 ```
 
-# 13. Supplier sales volume
+# 13. Suppliers with the highest sales volume
 
 It shows the top-selling products from the highest-performing suppliers in terms of sales volume. It provides insights into sales volume and supplier performance crucial for inventory management and strategic supplier relationships.
 
@@ -1418,7 +1425,7 @@ GROUP BY p.supplier_id
 ORDER BY sales_volume DESC LIMIT 5;
 ```
 
-# 14. Supplier revenue
+# 14. Suppliers with the highest revenue
 
 The table shows the highest revenue achieved by highlighting the product and category name. This is an indication to which suppliers offer the most profitable products within our E-commerce.
 ```{sql connection=connection}
