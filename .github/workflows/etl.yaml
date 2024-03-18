@@ -30,7 +30,7 @@ jobs:
       - name: Install packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite", "tidyverse", "DBI", "emmeans", "gridExtra", "knitr"))'
+          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite", "DBI", "emmeans", "gridExtra", "knitr"))'
       
       - name: Execute R script
         run: |
@@ -56,6 +56,9 @@ jobs:
          git config --global user.email "savvinanicolaou@gmail.com"
          git config --global user.name "savvinanic"
          git add --all figures/
+      - name: Pull changes
+        run: |
+          git pull --no-rebase origin master
       - name: Push changes 
         uses: ad-m/github-push-action@v0.6.0
         with:
