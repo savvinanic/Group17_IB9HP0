@@ -1,25 +1,25 @@
 name: Update Repo with result
 
 on:
-#  schedule:
-#    - cron: '0 */3 * * *' # Run every 3 hours
   push:
-    branches: [ master ]
+    branches: [master]
     paths:
-    - '.github/workflows/**'
-    - 'R_code'
-    - 'Dataset/**'
-  
+      - '.github/workflows/**'
+      - 'R_code'
+      - 'Dataset/**'
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Setup R environment
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.2.0'
+
       - name: Cache R packages
         uses: actions/cache@v2
         with:
@@ -27,38 +27,46 @@ jobs:
           key: ${{ runner.os }}-r-${{ hashFiles('**/lockfile') }}
           restore-keys: |
             ${{ runner.os }}-r-
+
       - name: Install packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite", "DBI", "gridExtra", "knitr"))'
-      
+          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite", "DBI", "emmeans", "gridExtra", "knitr"))'
+
+      - name: Create figures directory
+        run: mkdir -p figures
+
       - name: Execute R script
         run: |
           Rscript R/R_code.R
+
       - name: Add files
         run: |
-         git config --global --unset-all "http.https://github.com/.extraheader" || true
-         git config --global user.email "savvinanicolaou@gmail.com"
-         git config --global user.name "savvinanic"
-         git add --all database/
+          git config --global --unset-all "http.https://github.com/.extraheader" || true
+          git config --global user.email "savvinanicolaou@gmail.com"
+          git config --global user.name "savvinanic"
+          git add --all database/
 
       - name: Commit files
         run: |
-         git add hi_import.db
-         git commit -m "Update Database"
+          git add hi_import.db
+          git commit -m "Update Database"
 
       - name: Execute R script analysis
         run: |
           Rscript R/data_analysis.R
+
       - name: Add plots
         run: |
-         git config --global --unset-all "http.https://github.com/.extraheader" || true
-         git config --global user.email "savvinanicolaou@gmail.com"
-         git config --global user.name "savvinanic"
-         git add --all figures/
+          git config --global --unset-all "http.https://github.com/.extraheader" || true
+          git config --global user.email "savvinanicolaou@gmail.com"
+          git config --global user.name "savvinanic"
+          git add --all figures/
+
       - name: Pull changes
         run: |
           git pull --no-rebase origin master
+
       - name: Push changes 
         uses: ad-m/github-push-action@v0.6.0
         with:
