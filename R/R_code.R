@@ -4,7 +4,7 @@ library(dplyr)
 library(DBI)
 
 # Load Files in an sqlite database 
-connection <- RSQLite::dbConnect(RSQLite::SQLite(),"hi_import.db")
+connection <- RSQLite::dbConnect(RSQLite::SQLite(),"database/hi_import.db")
 
 # Drop tables
 RSQLite::dbExecute(connection, "DROP TABLE IF EXISTS product")

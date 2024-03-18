@@ -936,7 +936,7 @@ knitr::include_graphics("GitHub.png")
 
 ## Part 3.2: GitHub Actions for Continuous Integration
 
-We commence by establishing the workflow, which activates in response to any push or pull requests. Once the equired R environment and packages are installed, it reads the R script file named "R_code.R". This file orchestrates a spectrum of operations encompassing SQL table creation, data validation, database updates, and visualization tasks. All generated graphs, pivotal for fostering informed decision-making and strategic planning within our E-commerce realm, are stored within the "figures" folder. Consequently, with each alteration, the workflow seamlessly automates all activities delineated within the R script file.
+We commence by establishing the workflow, which activates in response to any push or pull requests. Once the required R environment and packages are installed, it reads the R script file named "R_code.R". This file orchestrates a spectrum of operations encompassing SQL table creation, data validation, database updates, and visualization tasks. All generated graphs, pivotal for fostering informed decision-making and strategic planning within our E-commerce realm, are stored within the "figures" folder. Consequently, with each alteration, the workflow seamlessly automates all activities delineated within the R script file.
 
 All changes are systematically pushed to the master branch,  requiring the use of our unique token for authentication.Notably, this workflow operates on a recurring schedule, executing every 3 hours, ensuring our project's continuous alignment with any changes or updates.
 
