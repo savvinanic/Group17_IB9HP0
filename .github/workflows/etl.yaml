@@ -30,11 +30,22 @@ jobs:
       - name: Install packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite", "tidyverse"))'
+          Rscript -e 'install.packages(c("ggplot2", "dplyr", "readr", "RSQLite", "tidyverse", "DBI", "emmeans", "gridExtra", "knitr", "magick", "grid"))'
       
       - name: Execute R script
         run: |
           Rscript R_code.R
+          Rscript -e 'install.packages("readr")'
+          Rscript -e 'install.packages("RSQLite")'
+          Rscript -e 'install.packages("dplyr")'
+          Rscript -e 'install.packages("DBI")'
+          Rscript -e 'install.packages("ggplot2")
+          Rscript -e 'install.packages("tidyverse")'
+          Rscript -e 'install.packages("emmeans")'
+          Rscript -e 'install.packages("gridExtra")'
+          Rscript -e 'install.packages("knitr")'
+          Rscript -e 'install.packages("magick")'
+          Rscript -e 'install.packages("grid")'
       - name: Add files
         run: |
          git config --global --unset-all "http.https://github.com/.extraheader" || true
