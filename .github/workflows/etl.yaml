@@ -35,26 +35,24 @@ jobs:
       - name: Execute R script
         run: |
           Rscript R_code.R
-          Rscript -e 'install.packages("readr")'
-          Rscript -e 'install.packages("RSQLite")'
-          Rscript -e 'install.packages("dplyr")'
-          Rscript -e 'install.packages("DBI")'
-          Rscript -e 'install.packages("ggplot2")
-          Rscript -e 'install.packages("tidyverse")'
-          Rscript -e 'install.packages("emmeans")'
-          Rscript -e 'install.packages("gridExtra")'
-          Rscript -e 'install.packages("knitr")'
-          Rscript -e 'install.packages("magick")'
-          Rscript -e 'install.packages("grid")'
+      - name: Add files
+        run: |
+         git config --global --unset-all "http.https://github.com/.extraheader" || true
+         git config --global user.email "savvinanicolaou@gmail.com"
+         git config --global user.name "savvinanic"
+         git add --all database/
+      - name: Commit files
+        run: |
+          git commit -m "Update Database"
+      - name: Execute R script analysis
+        run: |
+          Rscript R/data_analysis.R
       - name: Add files
         run: |
          git config --global --unset-all "http.https://github.com/.extraheader" || true
          git config --global user.email "savvinanicolaou@gmail.com"
          git config --global user.name "savvinanic"
          git add --all figures/
-      - name: Commit files
-        run: |
-          git commit -m "Update Database"
       - name: Push changes 
         uses: ad-m/github-push-action@v0.6.0
         with:
