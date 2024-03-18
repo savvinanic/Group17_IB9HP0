@@ -764,7 +764,7 @@ if (nrow(referential_integrity11) == 0) {
 # Import Datasets
 Next we imported csv files into SQL table for all datasets, including the ones we generated after normalization.
 
-## For loop to read csv and then import into sql
+## Read csv and then import into sql
 
 ```{r}
 # Read datasets

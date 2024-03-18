@@ -81,22 +81,6 @@ RSQLite::dbExecute(connection, "
 
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM customer;"))
 
-# delivery
-RSQLite::dbExecute(connection, "
-                   CREATE TABLE delivery (
-                   tracking_number INT PRIMARY KEY, 
-                   trans_id INT,
-                   shipment_method VARCHAR(50) NOT NULL,
-                   tracking_status VARCHAR(50) NOT NULL,
-                   estimated_delivery_date DATE NOT NULL,
-                   estimated_delivery_time TIME NOT NULL,
-                   actual_delivery_date DATE NULL, 
-                   actual_delivery_time TIME NULL,
-                   delivery_instructions VARCHAR(125) NOT NULL,
-                   FOREIGN KEY (trans_id) REFERENCES 'transaction'(trans_id)
-                   );")
-
-print(RSQLite::dbGetQuery(connection, "SELECT * FROM delivery;"))
 
 # product
 RSQLite::dbExecute(connection, "
@@ -143,6 +127,23 @@ RSQLite::dbExecute(connection, "
                    );")
 
 print(RSQLite::dbGetQuery(connection, "SELECT * FROM 'transaction';"))
+
+# delivery
+RSQLite::dbExecute(connection, "
+                   CREATE TABLE delivery (
+                   tracking_number INT PRIMARY KEY, 
+                   trans_id INT,
+                   shipment_method VARCHAR(50) NOT NULL,
+                   tracking_status VARCHAR(50) NOT NULL,
+                   estimated_delivery_date DATE NOT NULL,
+                   estimated_delivery_time TIME NOT NULL,
+                   actual_delivery_date DATE NULL, 
+                   actual_delivery_time TIME NULL,
+                   delivery_instructions VARCHAR(125) NOT NULL,
+                   FOREIGN KEY (trans_id) REFERENCES 'transaction'(trans_id)
+                   );")
+
+print(RSQLite::dbGetQuery(connection, "SELECT * FROM delivery;"))
 
 # Normalization to 3NF
 
