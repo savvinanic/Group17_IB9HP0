@@ -1,0 +1,89 @@
+﻿category_name,parent_category_id
+Beauty,
+Books,
+Clothing,
+Electronics,
+Grocery,
+Home & Kitchen,
+Sports,
+Toys,
+Body Wash,Beauty
+Cleanser,Beauty
+Conditioner,Beauty
+Facial Mask,Beauty
+Hair Styling Product,Beauty
+Makeup Remover,Beauty
+Moisturizer,Beauty
+Perfume,Beauty
+Shampoo,Beauty
+Sunscreen,Beauty
+Biography,Books
+Fantasy,Books
+Fiction,Books
+History,Books
+Mystery,Books
+Non-Fiction,Books
+Romance,Books
+Science Fiction,Books
+Self-Help,Books
+Thriller,Books
+Coat,Clothing
+Dress,Clothing
+Jacket,Clothing
+Jeans,Clothing
+Pants,Clothing
+Shirt,Clothing
+Shorts,Clothing
+Skirt,Clothing
+Sweater,Clothing
+T-shirt,Clothing
+Camera,Electronics
+Headphones,Electronics
+Laptop,Electronics
+Printer,Electronics
+Router,Electronics
+Smartphone,Electronics
+Smartwatch,Electronics
+Speaker,Electronics
+TV,Electronics
+Tablet,Electronics
+Baking Ingredients,Grocery
+Beverages,Grocery
+Canned Goods,Grocery
+Cereal,Grocery
+Condiments,Grocery
+Fresh Produce,Grocery
+Frozen Foods,Grocery
+Pasta,Grocery
+Rice,Grocery
+Snacks,Grocery
+Blender,Home & Kitchen
+Coffee Maker,Home & Kitchen
+Cookware Set,Home & Kitchen
+Dining Set,Home & Kitchen
+Food Processor,Home & Kitchen
+Knife Set,Home & Kitchen
+Microwave,Home & Kitchen
+Pressure Cooker,Home & Kitchen
+Rice Cooker,Home & Kitchen
+Toaster,Home & Kitchen
+Basketball,Sports
+Dumbbells,Sports
+Exercise Bike,Sports
+Football,Sports
+Golf Clubs,Sports
+Running Shoes,Sports
+Soccer Ball,Sports
+Swimming Goggles,Sports
+Tennis Racket,Sports
+Yoga Mat,Sports
+Action Figures,Toys
+Board Games,Toys
+Building Blocks,Toys
+Dolls,Toys
+Educational Toys,Toys
+Outdoor Toys,Toys
+Puzzles,Toys
+Remote Control Toys,Toys
+Stuffed Animals,Toys
+Toy Vehicles,Toys

@@ -242,3 +242,75 @@ ggsave("figures/Monthly Revenue by City.png", plot = g9, width = 10, height = 6)
 
 
 
+# 11. Total 5 production with highest revenue
+
+Top5_Products_Revenue <- RSQLite::dbGetQuery(connection,"
+SELECT p.product_name, p.category_name, ROUND(SUM(p.product_price* o.product_qty)*(1 - CAST(prm.percentage_discount AS REAL) / 100),2) AS revenue
+FROM 'order_products_info' o, 'product' p, 'promotion' prm, 'customer_basic_info' c, 'customer_membership' m
+WHERE o.customer_id = m.customer_id AND o.product_id = p.product_id AND c.promo_code = prm.promo_code AND m.customer_id = c.customer_id
+GROUP BY p.product_name
+ORDER BY revenue DESC LIMIT 5;
+")
+
+library(magick)
+library(grid)
+table <- tableGrob(Top5_Products_Revenue)
+img <- image_graph(width = 800, height = 600, res = 96)
+grid.draw(table)
+dev.off()
+image_write(img, path = "Top5_Products_Revenue.png", format = "png")
+
+
+# 12. Top 10 customers that had the highest transaction amount, the percentage discount applied
+Top10_Customer_Transaction_Amount <- RSQLite::dbGetQuery(connection,"
+SELECT 
+    o.customer_id, 
+    o.order_id, 
+    prm.percentage_discount, 
+    ROUND(SUM(p.product_price * o.product_qty) * (1 - CAST(prm.percentage_discount AS REAL) / 100) + m.delivery_fee, 2) AS trans_amount
+  FROM 'order_products_info' o
+  JOIN 'product' p ON o.product_id = p.product_id
+  JOIN 'customer_basic_info' c ON o.customer_id = c.customer_id
+  JOIN 'promotion' prm ON c.promo_code = prm.promo_code
+  JOIN 'customer_membership' m ON c.customer_id = m.customer_id
+  GROUP BY o.order_id
+  ORDER BY trans_amount DESC 
+  LIMIT 10
+")
+
+table <- tableGrob(Top10_Customer_Transaction_Amount)
+img <- image_graph(width = 800, height = 600, res = 96)
+grid.draw(table)
+dev.off()
+image_write(img, path = "Top10_Customer_Transaction_Amount.png", format = "png")
+
+# 13. Top 5 supplier sales volumne
+Top5_Suplier_Sales_Volume <- RSQLite::dbGetQuery(connection,"
+SELECT s.supplier_name, p.category_name, p.product_name, SUM(o.product_qty) AS sales_volume
+FROM 'order_products_info' o, 'product' p, 'promotion' prm, 'customer_basic_info' c, 'customer_membership' m, 'supplier' s
+WHERE o.customer_id = m.customer_id AND o.product_id = p.product_id AND c.promo_code = prm.promo_code AND m.customer_id = c.customer_id AND s.supplier_id = p.supplier_id
+GROUP BY p.supplier_id
+ORDER BY sales_volume DESC LIMIT 5;
+")
+
+table <- tableGrob(Top5_Suplier_Sales_Volume)
+img <- image_graph(width = 800, height = 600, res = 96)
+grid.draw(table)
+dev.off()
+image_write(img, path = "Top5_Suplier_Sales_Volume.png", format = "png")
+
+
+# 14. Top 5 supplier sales revenue
+Top5_Suplier_Sales_Revenue <- RSQLite::dbGetQuery(connection,"
+SELECT s.supplier_name, p.category_name, p.product_name, ROUND(SUM(p.product_price* o.product_qty)*(1 - CAST(prm.percentage_discount AS REAL) / 100),2) AS revenue
+FROM 'order_products_info' o, 'product' p, 'promotion' prm, 'customer_basic_info' c, 'customer_membership' m, 'supplier' s
+WHERE o.customer_id = m.customer_id AND o.product_id = p.product_id AND c.promo_code = prm.promo_code AND m.customer_id = c.customer_id AND s.supplier_id = p.supplier_id
+GROUP BY p.supplier_id
+ORDER BY revenue DESC LIMIT 5;
+")
+
+table <- tableGrob(Top5_Suplier_Sales_Revenue)
+img <- image_graph(width = 800, height = 600, res = 96)
+grid.draw(table)
+dev.off()
+image_write(img, path = "Top5_Suplier_Sales_Revenue.png", format = "png")
