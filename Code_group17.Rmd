@@ -498,8 +498,9 @@ In our pursuit of ensuring data integrity, we implemented a comprehensive qualit
 4. Validation of primary keys.
 5. Validate phone number
 6. Validate email address
+7. Referential Integrity Check
 
-By using a “for loop”, we are able to perform these checks across all columns in each table. Each dataset should be verified to have unique value for primary key and no missing value for fields which required to have information. However, for Order dataset, there are some unique requirements as we have component primary key, we have created different process to handle this scenario. Furthermore, in Customer dataset, there are e-mail and phone number columns, which required specific format checks. For e-mail, special characters “@” and ending domain must be validated. For phone number, IT must be ensured to have 10 numeric characters.
+By using a “for loop”, we are able to perform these checks across all columns in each table. Each dataset should be verified to have unique value for primary key and no missing value for fields which required to have information. However, for Order dataset, there are some unique requirements as we have component primary key, we have created different process to handle this scenario. Furthermore, in Customer dataset, there are e-mail and phone number columns, which required specific format checks. For e-mail, special characters “@” and ending domain must be validated. For phone number, IT must be ensured to have 10 numeric characters. Lastly, we perform referential integrity checks to ensure that each table has the required foreign keys that are consistent with the primary keys of other tables within the 'Dataset' folder. 
 
 # List all files
 
@@ -624,8 +625,144 @@ length(grepl("@", supplier_dataset$supplier_email)) == nrow(supplier_dataset)
 length(grepl("@", customer_basic_info_dataset$customer_email)) == nrow(customer_basic_info_dataset)
 ```
 
+
+## 7. Referential Integrity Check
+
+```{r}
+#Customer info - Promo_code
+customer_basic_info_dataset <- read.csv("Dataset/hi_customer_basic_info_dataset.csv")
+promotion_dataset <- read.csv("Dataset/hi_promotion_dataset.csv")
+
+referential_integrity1 <- customer_basic_info_dataset  %>%
+  anti_join(promotion_dataset, by = "promo_code")
+if (nrow(referential_integrity1) == 0) {
+  cat("customer - promo_code referential integrity check passed.\n")
+} else {
+  cat("customer - promo_code referential integrity check failed.\n")
+  print(referential_integrity1)
+}
+
+#Customer info - Customer membership
+customer_membership_dataset <- read.csv("Dataset/hi_customer_membership_dataset.csv")
+
+referential_integrity2 <- customer_basic_info_dataset  %>%
+  anti_join(customer_membership_dataset, by = "customer_id")
+if (nrow(referential_integrity2) == 0) {
+  cat("customer_info - customer membership referential integrity check passed.\n")
+} else {
+  cat("customer_info - customer membership referential integrity check failed.\n")
+  print(referential_integrity2)
+}
+
+#Order-Customer-product
+order_products_info_dataset <- read.csv("Dataset/hi_order_products_info_dataset.csv")
+product_dataset <- read.csv("Dataset/hi_product_dataset.csv")
+
+referential_integrity3 <- order_products_info_dataset  %>%
+  anti_join(customer_basic_info_dataset, by = "customer_id")
+if (nrow(referential_integrity3) == 0) {
+  cat("order - customer_id referential integrity check passed.\n")
+} else {
+  cat("order - customer_info referential integrity check failed.\n")
+  print(referential_integrity3)
+}
+referential_integrity4 <- order_products_info_dataset  %>%
+  anti_join(product_dataset, by = "product_id")
+if (nrow(referential_integrity4) == 0) {
+  cat("order - product_id referential integrity check passed.\n")
+} else {
+  cat("order - product_id referential integrity check failed.\n")
+  print(referential_integrity4)
+}
+
+#order_date_time - customer_info
+order_datetime_dataset <- read.csv("Dataset/hi_order_datetime_dataset.csv")
+
+referential_integrity5 <- order_datetime_dataset  %>%
+  anti_join(customer_basic_info_dataset, by = "customer_id")
+if (nrow(referential_integrity5) == 0) {
+  cat("order_date_time - customer_info referential integrity check passed.\n")
+} else {
+  cat("order_date_time - customer_info referential integrity check failed.\n")
+  print(referential_integrity5)
+}
+
+#delivery-transaction_id
+delivery_tracking_dataset <- read.csv("Dataset/hi_delivery_tracking_dataset.csv")
+transaction_dataset <- read.csv("Dataset/hi_transaction_dataset.csv")
+
+referential_integrity6 <- delivery_tracking_dataset  %>%
+  anti_join(transaction_dataset, by = "trans_id")
+if (nrow(referential_integrity6) == 0) {
+  cat("delivery- transaction_id referential integrity check passed.\n")
+} else {
+  cat("delivery- transaction_id referential integrity check failed.\n")
+  print(referential_integrity6)
+}
+
+#estimated_deli - tracking_number
+estimated_delivery_date_dataset <- read.csv("Dataset/hi_estimated_delivery_date_dataset.csv")
+
+referential_integrity7 <- estimated_delivery_date_dataset  %>%
+  anti_join(delivery_tracking_dataset, by = "tracking_number")
+if (nrow(referential_integrity7) == 0) {
+  cat("estimated_delivery - tracking_number referential integrity check passed.\n")
+} else {
+  cat("estimated_delivert - tracking_number referential integrity check failed.\n")
+  print(referential_integrity7)
+}
+
+#actual_deli - tracking
+actual_delivery_date_dataset <- read.csv("Dataset/hi_actual_delivery_date_dataset.csv")
+
+referential_integrity8 <- actual_delivery_date_dataset  %>%
+  anti_join(delivery_tracking_dataset, by = "tracking_number")
+if (nrow(referential_integrity8) == 0) {
+  cat("actual_delivery - tracking_number referential integrity check passed.\n")
+} else {
+  cat("actual_delivery - tracking_number referential integrity check failed.\n")
+  print(referential_integrity8)
+}
+
+
+#product-supplier-category
+supplier_dataset <- read.csv("Dataset/hi_supplier_dataset.csv")
+product_category_dataset <- read.csv("Dataset/hi_product_category_dataset.csv")
+
+referential_integrity9 <- product_dataset  %>%
+  anti_join(supplier_dataset, by = "supplier_id")
+if (nrow(referential_integrity9) == 0) {
+  cat("product-supplier referential integrity check passed.\n")
+} else {
+  cat("product-supplier referential integrity check failed.\n")
+  print(referential_integrity9)
+}
+referential_integrity10 <- product_dataset  %>%
+  anti_join(product_category_dataset, by = "category_name")
+if (nrow(referential_integrity10) == 0) {
+  cat("product-category referential integrity check passed.\n")
+} else {
+  cat("product-category referential integrity check failed.\n")
+  print(referential_integrity10)
+}
+
+
+#transaction - order
+transaction_dataset <- read.csv("Dataset/hi_transaction_dataset.csv")
+
+referential_integrity11 <- transaction_dataset  %>%
+  anti_join(order_products_info_dataset, by = "order_id")
+if (nrow(referential_integrity11) == 0) {
+  cat("product-category referential integrity check passed.\n")
+} else {
+  cat("product-category referential integrity check failed.\n")
+  print(referential_integrity11)
+}
+```
+
+
 # Import Datasets
-Then we imported csv files into SQL table for all datasets, including the ones we generated after normalization.
+Next we imported csv files into SQL table for all datasets, including the ones we generated after normalization.
 
 ## For loop to read csv and then import into sql
 
@@ -861,8 +998,7 @@ jobs:
 # Part 4: Data Analysis and Reporting
 
 # Data Visualisation
-In this section we created diverse graphs including histograms, line and pie charts and tables in SQL. This is vital as it will provide us with insights about 
-potential issues, customer satisfaction and experience, if they are any areas of improvement in various operations like delivery service, sales by city, membership and promotions. Below are listed all titles and different visualizations we generated.
+In this section we created diverse graphs including bar, line and pie charts and tables in SQL. This is vital as it will provide us with insights about potential issues, customer satisfaction and experience, if they are any areas of improvement in various operations like delivery service, sales by city, membership and promotions. Below are listed all titles and different visualizations we generated.
 
 1. Product Category vs Count
 2. Sales by Category
@@ -879,7 +1015,6 @@ potential issues, customer satisfaction and experience, if they are any areas of
 13. Top 10 customers with the highest transaction amount, percentage discount applied and products bought
 14. Supplier sales volume
 15. Supplier revenue
-16. Sales by Category
 
 
 ```{r echo=FALSE}
